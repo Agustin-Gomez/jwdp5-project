@@ -1,0 +1,93 @@
+/*elements principaux*/
+/*police*/
+@font-face {
+  font-family: "kalam-regular";
+  src: url("../font/kalam-regular-webfont.woff");
+}
+
+@font-face {
+  font-family: "Montserrat-Regular";
+  src: url("../font/Montserrat-Regular-webfont.woff");
+}
+/*body {
+  margin: auto;
+}*/
+
+/*.container {
+  text-align: center;
+}*/
+
+
+.menu-container {
+  background-color: #efe9eb;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar-menu {
+  font-family: "montserratregular";
+}
+.site-navigation {
+  list-style-type: none;
+}
+
+.site-navigation a {
+  text-decoration: none;
+  color: black;
+}
+a{
+  color: #875bce;
+}
+
+
+/*titres*/
+h1 {
+  font-size: 1.9em;
+  padding-top: 60px;
+  font-family: "kalamregular";
+  background: linear-gradient(to right, #e53935 20%, #5e35b1 90%);
+  color: transparent;
+  -webkit-background-clip: text;
+}
+h2 {
+  font-size: 1.3em;
+  padding-top: 60px;
+  padding-bottom: 50px;
+  font-family: "kalamregular";
+  background: linear-gradient(to right, #e53935 20%, #5e35b1 90%);
+  color: transparent;
+  -webkit-background-clip: text;
+}
+
+h3 {
+  font-size: 1.2em;
+  font-family: "kalamregular";
+}
+
+/*
+footer {
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  bottom: 0;
+  background-color: #efe9eb;
+  padding: 2rem;
+}
+
+footer a {
+  color: black;
+  font-family: "montserratregular";
+  font-size: 1.2em;
+  font-weight: bold;
+  text-decoration: none;
+}
+.merci {
+  font-size: 1.5em;
+}
+
+
+.titreform {
+  font-size: 1.5em;
+}
+.form-group {
+}*/
