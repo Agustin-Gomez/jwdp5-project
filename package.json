@@ -1,0 +1,19 @@
+{
+  "name": "jwdp5",
+  "version": "1.0.0",
+  "description": "Il utilise JS , bootstrap , Fetch , html /css.\r Se compose d'un dossier backend déjà crée et d'un dossier frontend qu'il a fallu creer.\r Un thème a été utilisé pour creer l'interface.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lazouz44/JWDP5.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lazouz44/JWDP5/issues"
+  },
+  "homepage": "https://github.com/lazouz44/JWDP5#readme"
+}

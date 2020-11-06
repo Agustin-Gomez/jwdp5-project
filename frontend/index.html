@@ -11,12 +11,14 @@
     />
     <meta name="author" content="" />
 
-    <title>Orinco, le meilleur site de vente en ligne</title>
+    <title>Orinoco, le meilleur site de vente en ligne</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <!--style css-->
     <link rel="stylesheet" href="css/style.css" />
+    <!--lien orinoco.js-->
+    <script type="text/javascript" src="js/orinoco.js"></script>
     <!--favicon-->
     <link rel="shortcut icon" href="images/favicon.png" />
 
@@ -76,9 +78,9 @@
       <div class="row">
         <div class="col-lg-3">
           <h1 class="my-4">Orinoco, nos meubles en chênes</h1>
-          <div class="list-group">
+          <!--<div class="list-group">
             <a href="#" class="list-group-item">Petite table faite main</a>
-            <!--de meme il faut ajouter un lien vers la page du produit selectionné ,il faut son ID-->
+            
             <a href="#" class="list-group-item"
               >Grande table en chêne rectangulaire</a
             >
@@ -87,7 +89,7 @@
             <a href="#" class="list-group-item"
               >La chaise vintage chêne brute</a
             >
-          </div>
+          </div>-->
         </div>
         <!-- /.col-lg-3 -->
 
@@ -161,7 +163,7 @@
             </a>
           </div>
 
-          <div class="row">
+          <div class="row" id="productList">
             <div class="col-lg-4 col-md-6 mb-4">
               <div class="card h-100">
                 <!--au clic sur les 2 liens on doit arriver sur la page du produit, how to do?-->
@@ -173,19 +175,20 @@
                 /></a>
                 <div class="card-body">
                   <h4 class="card-title">
-                    <a href="#">Petite table faite main</a>
+                    <a href="#" class="card-a">Petite table faite main</a>
                     <!--il faudra creer un lien vers la page du produit pour quil puisse etre ajouté au panier-->
                   </h4>
-                  <h5>$24.99</h5>
+
                   <p class="card-text">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Amet numquam aspernatur!
                   </p>
                 </div>
                 <div class="card-footer">
-                  <small class="text-muted"
+                  <h5 class="card-price">$24.99</h5>
+                  <!-- <small class="text-muted"
                     >&#9733; &#9733; &#9733; &#9733; &#9734;</small
-                  >
+                  > -->
                 </div>
               </div>
             </div>
@@ -202,16 +205,18 @@
                   <h4 class="card-title">
                     <a href="#">Grande table en chêne rectangulaire</a>
                   </h4>
-                  <h5>$24.99</h5>
+
                   <p class="card-text">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Amet numquam aspernatur! Lorem ipsum dolor sit amet.
                   </p>
                 </div>
                 <div class="card-footer">
-                  <small class="text-muted"
+                  <h5 class="card-price">$24.99</h5>
+
+                  <!--<small class="text-muted"
                     >&#9733; &#9733; &#9733; &#9733; &#9734;</small
-                  >
+                  >-->
                 </div>
               </div>
             </div>
@@ -228,16 +233,18 @@
                   <h4 class="card-title">
                     <a href="#">Belle table ronde</a>
                   </h4>
-                  <h5>$24.99</h5>
+
                   <p class="card-text">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Amet numquam aspernatur!
                   </p>
                 </div>
                 <div class="card-footer">
-                  <small class="text-muted"
+                  <h5 class="card-price">$24.99</h5>
+
+                  <!-- <small class="text-muted"
                     >&#9733; &#9733; &#9733; &#9733; &#9734;</small
-                  >
+                  >-->
                 </div>
               </div>
             </div>
@@ -254,16 +261,18 @@
                   <h4 class="card-title">
                     <a href="#">Banc chêne brut</a>
                   </h4>
-                  <h5>$24.99</h5>
+
                   <p class="card-text">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Amet numquam aspernatur!
                   </p>
                 </div>
                 <div class="card-footer">
-                  <small class="text-muted"
+                  <h5 class="card-price">$24.99</h5>
+
+                  <!-- <small class="text-muted"
                     >&#9733; &#9733; &#9733; &#9733; &#9734;</small
-                  >
+                  >-->
                 </div>
               </div>
             </div>
@@ -280,16 +289,18 @@
                   <h4 class="card-title">
                     <a href="#">La chaise vintage chêne brute</a>
                   </h4>
-                  <h5>$24.99</h5>
+
                   <p class="card-text">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Amet numquam aspernatur! Lorem ipsum dolor sit amet.
                   </p>
                 </div>
                 <div class="card-footer">
-                  <small class="text-muted"
+                  <h5 class="card-price">$24.99</h5>
+
+                  <!-- <small class="text-muted"
                     >&#9733; &#9733; &#9733; &#9733; &#9734;</small
-                  >
+                  >-->
                 </div>
               </div>
             </div>

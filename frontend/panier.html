@@ -16,7 +16,9 @@
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <!--style css-->
-    <link  rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <!--lien panier.js-->
+    <script type="text/javascript" src="js/panier.js"></script>
     <!--favicon-->
     <link rel="shortcut icon" href="images/favicon.png" />
 
@@ -74,7 +76,7 @@
       <div class="row">
         <div class="col-lg-3">
           <h1 class="my-4">Orinoco, nos meubles en chênes</h1>
-          <div class="list-group">
+          <!-- <div class="list-group">
             <a href="#" class="list-group-item">Petite table faite main</a>
             <a href="#" class="list-group-item"
               >Grande table en chêne rectangulaire</a
@@ -84,7 +86,7 @@
             <a href="#" class="list-group-item"
               >La chaise vintage chêne brute</a
             >
-          </div>
+          </div>-->
         </div>
         <!-- /.col-lg-3 -->
 
@@ -158,65 +160,92 @@
             </a>
           </div>
           <div class="row">
-           <!-- <div class="col-lg-4 col-md-6 mb-4">-->
-              <div class="card <!--h-100-->">
-                <h2>Détail de votre panier</h2>
-                <table class="table table-bordered" id="resume_panier">
-                      <thead>
-                          <tr>
-                              <th scope="col">Numéro</th>
-                              <th scope="col">Article</th>
-                              <th scope="col">Prix</th>
-                              <th scope="col">Prix total</th>
-                          </tr>
-                      </thead>
-                      <tbody id="resume_panier_test"></tbody>
-                </table>
-                <div class="col-md-12 text-center" id="erreur_panier">
-                    <p>Vous n'avez pas de commande</p>
-                </div>
+            <!-- <div class="col-lg-4 col-md-6 mb-4">-->
+            <div class="card <!--h-100-->">
+              <h2>Détail de votre panier</h2>
+              <table class="table table-bordered" id="resume_panier">
+                <thead>
+                  <tr>
+                    <th scope="col">Numéro</th>
+                    <th scope="col">Article</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Prix total</th>
+                  </tr>
+                </thead>
+                <tbody id="resume_panier_test"></tbody>
+              </table>
+              <div class="col-md-12 text-center" id="erreur_panier">
+                <p>Vous n'avez pas de commande</p>
               </div>
-                
+            </div>
+
             <!-- <div class="col-lg-4 col-md-6 mb-4">-->
             <div class="card <!--h-100-->">
               <h2>
                 Pour pouvoir valider votre commande merci de remplir tous les
                 champs
               </h2>
-              
+
               <form action="" method="post">
-                    <div class="row form-group">
-                        <div class="col-md-5">
-                            <label for="prenom_contact">Prénom :</label>
-                            <input type="text" name="prenom_contact" id="prenom_contact" class="form-control">
-                        </div>
-                        <div class="col-md-2">
-                            
-                        </div>
-                        <div class="col-md-5">
-                            <label for="nom_contact">Nom :</label>
-                            <input type="text" name="nom_contact" id="nom_contact" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-12 form-group">
-                        <label for="email_contact">Adresse mail :</label>
-                        <input type="email" name="email_contact" id="email_contact" class="form-control">
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-md-5">
-                            <label for="adresse_contact">Adresse :</label>
-                            <input type="text" name="adresse_contact" id="adresse_contact" class="form-control">
-                        </div>
-                        <div class="col-md-2">
-                            
-                        </div>
-                        <div class="col-md-5">
-                            <label for="ville_contact">Ville :</label>
-                            <input type="text" name="ville_contact" id="ville_contact" class="form-control">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-danger" id="envoyer_commande">Commander</button>
-                </form>
+                <div class="row form-group">
+                  <div class="col-md-5">
+                    <label for="prenom_contact">Prénom :</label>
+                    <input
+                      type="text"
+                      name="prenom_contact"
+                      id="prenom_contact"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="col-md-2"></div>
+                  <div class="col-md-5">
+                    <label for="nom_contact">Nom :</label>
+                    <input
+                      type="text"
+                      name="nom_contact"
+                      id="nom_contact"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-12 form-group">
+                  <label for="email_contact">Adresse mail :</label>
+                  <input
+                    type="email"
+                    name="email_contact"
+                    id="email_contact"
+                    class="form-control"
+                  />
+                </div>
+                <div class="row form-group">
+                  <div class="col-md-5">
+                    <label for="adresse_contact">Adresse :</label>
+                    <input
+                      type="text"
+                      name="adresse_contact"
+                      id="adresse_contact"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="col-md-2"></div>
+                  <div class="col-md-5">
+                    <label for="ville_contact">Ville :</label>
+                    <input
+                      type="text"
+                      name="ville_contact"
+                      id="ville_contact"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  class="btn btn-danger"
+                  id="envoyer_commande"
+                >
+                  Commander
+                </button>
+              </form>
             </div>
           </div>
           <!-- /.row -->
