@@ -1,5 +1,6 @@
+/*
 /////////////////////////////////////////RECUPERATION DE L'API///////////////////////////////////////////////////
-const getFurnitures = async function () {
+const getProducts = async function () {
   ////fct asyncrone
   try {
     //// try pour gérer les erreures d'éxécution, on y met le code suceptible à l'erreure////
@@ -18,15 +19,17 @@ const getFurnitures = async function () {
   }
 };
 
-getFurnitures(); //// appel a get furnitures pour envoyer les photos////
+getProducts(); //// appel a get furnitures pour envoyer les photos////
 
 ////creation array pour chaque produit, card = le produit///////
 function displayAllProduct(products) {
   const productList = document.getElementById("productList");
   console.log(productList);
   products.forEach((card) => {
-    inHtml;
-    InnerHtml += `
+    
+    productList.insertAdjacentHtml(
+      "beforeend",
+      `
       <div class="card.h-100" style = "border: 1px solid rgba(0,0,0,.125); border-radius: .25rem;">
           <img class="card-img-top" src="${card.imgUrl}" alt="${card.name}>
           <h4 class="card-title">${card.title}</h4>
@@ -35,6 +38,14 @@ function displayAllProduct(products) {
           <a class="card-a" href="./produit.html?${card._id}">
           
         </div>
-        `;
-  });
+        `
+  );
 }
+*/
+/*fetch(url)
+  .then((response) => response.json())
+  .then((products) => {
+    console.log(products);
+    displayAllProducts(products);
+  })
+  .catch((e) => displayError());*/
