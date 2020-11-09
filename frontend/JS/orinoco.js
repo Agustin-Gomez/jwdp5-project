@@ -8,8 +8,9 @@ const getProducts = async () => {
 
     if (response.ok) {
       ////on vérifie si on a une réponse valide
-      let data = await response.json(); //// on attend la conversion du json en objet////
-      console.log(data);
+      let products = await response.json(); //// on attend la conversion du json en objet////
+      console.log(products);
+      displayAllProduct(products);
     } else {
       console.error("Retour du serveur : ", response.status); //// retour du serveur type 404 par ex//
     }
@@ -22,8 +23,6 @@ const getProducts = async () => {
 getProducts();
 
 ////////////////////////AFFICHAGE DES PRODUITS SOUS FORME DE LISTE, injection dans le DOM //////////////
-/*const url = "http://localhost:3000/api/furniture";*/
-
 function displayAllProduct(products) {
   ////je me place dans la div productList////
   const productList = document.getElementById("productList");
@@ -32,18 +31,14 @@ function displayAllProduct(products) {
   products.forEach((product) => {
     ////création du contenu de la div productList////
     productList.innerHTML += `
-        <div class="col-lg-4 col-md-6 mb4" >
-            <div class="card h-100">
-               <img class="card-img-top" src="${product.imageUrl}" alt="${product.name}>
-                <div class="card-body"> 
-                  <h4 class="card-title">${product.title}</h4>
-                  <a class="card-a" href="./produit.html?${product._id}>
-               </div>
-               <div class="card-footer>
-                  <h5 class="card-price">${product.price}</h5>
-               </div>
-            </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100">
+           <img class="card-img-top" src="${product.imageUrl}" alt="${product.name}>
+           <div class="card-body"><h4 class="card-title">${product.name} <a class="card-a" href="./produit.html?${product._id}</a></h4></div>
+           <div class="card-footer><h5 class="card-price">${product.price}</h5></div>
+          </div
+        
         </div>
-        `;
+            `;
   });
 }

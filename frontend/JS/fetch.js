@@ -49,3 +49,27 @@ function displayAllProduct(products) {
     displayAllProducts(products);
   })
   .catch((e) => displayError());*/
+
+/* function displayAllProduct(products) {
+    ////je me place dans la div productList////
+    const putInHtlm = document.getElementById("productList");
+    console.log(productList);
+
+    products.forEach((product) => {
+      ////création du contenu de la div productList////
+      putInHtml.innerHTML += `
+        <div class="col-lg-4 col-md-6 mb-4" >
+            <div class="card h-100">
+               <img class="card-img-top" src="${product.imageUrl}" alt="${product.name}>
+                <div class="card-body"> 
+                  <h4 class="card-title">${product.title}</h4>
+                  <a class="card-a" href="./produit.html?${product._id}>
+               </div>
+               <div class="card-footer>
+                  <h5 class="card-price">${product.price}</h5>
+               </div>
+            </div>
+        </div>
+        `;
+    });
+  }*/
