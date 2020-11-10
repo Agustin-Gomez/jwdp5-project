@@ -31,14 +31,16 @@ function displayAllProduct(products) {
   products.forEach((product) => {
     ////création du contenu de la div productList////
     productList.innerHTML += `
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card h-100">
-           <img class="card-img-top" src="${product.imageUrl}" alt="${product.name}>
-           <div class="card-body"><h4 class="card-title">${product.name} <a class="card-a" href="./produit.html?${product._id}</a></h4></div>
-           <div class="card-footer><h5 class="card-price">${product.price}</h5></div>
-          </div
-        
+         <div class="col-lg-4 col-md-6 mb-4" >
+            <div class="card h-100">
+               <img class="card-img-top" src="${product.imageUrl}" alt="${product.name}>
+              <div class= "card-body "><a class="card-a" href="./produit.html?${product._id}><h4 class="card-title">${product.name}</h4></a>
+                  <p class="card-text">${product.description}</p>
+                  <div class="card-footer"<h5 class="card-price">${product.price}</h5></div>
+              </div>   
+               
+            </div>
         </div>
-            `;
+        `;
   });
 }
