@@ -162,19 +162,19 @@
 
           <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
-              <div class="card h-100">
-                <a href="#"
-                  ><img
-                    class="card-img-top"
-                    src="http://placehold.it/700x400"
-                    alt=""
-                /></a>
+              <div class="card h-100" id="un-article">
+                <img
+                  class="card-img-top"
+                  src="http://placehold.it/700x400"
+                  alt=""
+                  id="article-photo"
+                />
                 <div class="card-body">
-                  <h4 class="card-title">
+                  <h4 class="card-title" id="nom-meuble">
                     <a href="#">Item Five</a>
                   </h4>
-                  <h5>$24.99</h5>
-                  <p class="card-text">
+                  <h5 id="prix-meuble">$24.99</h5>
+                  <p class="card-text" id="description-artcile">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Amet numquam aspernatur! Lorem ipsum dolor sit amet.
                   </p>
@@ -182,32 +182,43 @@
                 <div class="card-footer">
                   <div class="dropdown">
                     <div class="btn-group">
-                      <button type="button" class="btn btn-secondary">
-                        Je choisi une option
-                      </button>
+                      <form>
+                        <label for="option_personnalisation">
+                          option de personnalisation</label
+                        >
+                        <select
+                          name="option_personnalisation"
+                          id="option_personnalisation"
+                        ></select>
+                      </form>
+                      <!--<button type="button" class="btn btn-secondary" id="option-personnalisation">
+                                              Je choisi une option
+                                            </button>
+                                            <button
+                                              type="button"
+                                              class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
+                                              data-toggle="dropdown"
+                                              aria-haspopup="true"
+                                              aria-expanded="false"
+                                            >
+                                              <span class="sr-only">Action</span>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="menu">
+                                              <a class="dropdown-item" href="#">vernisx</a>
+                                              <a class="dropdown-item" href="#">x</a>
+                                              <a class="dropdown-item" href="#">y</a>
+                                            </div>
+                                          </div>
+                                        </div>-->
                       <button
                         type="button"
-                        class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
+                        class="btn btn-outline-success btn-sm mb-2"
+                        id="ajouter-au-panier"
                       >
-                        <span class="sr-only">Action</span>
+                        Ajouter au panier
                       </button>
-                      <div class="dropdown-menu" aria-labelledby="menu">
-                        <a class="dropdown-item" href="#">vernisx</a>
-                        <a class="dropdown-item" href="#">x</a>
-                        <a class="dropdown-item" href="#">y</a>
-                      </div>
                     </div>
                   </div>
-                  <button
-                    type="button"
-                    class="btn btn-outline-success btn-sm mb-2"
-                  >
-                    Ajouter au panier
-                  </button>
-                  <!--ici mettre le menu deroullant pour choix de loption et le bouton pour ajouter au panier,-->
                 </div>
               </div>
             </div>
