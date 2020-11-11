@@ -1,4 +1,48 @@
 /*
+/////
+/*function getId() {
+  const param = window.location.search; /////La propriété location, de l'objet Javascript window, permet de récupérer la chaine de requêtes ///
+  const id = param.replace("?id=", "");
+  return id;
+}
+
+const id = getId();
+get("http://localhost:3000/api/furniture/" + id)
+  .then(function (response) {
+    addProductInfo(response);
+  })
+
+  .catch(function (err) {
+    console.log(err);
+    if (err === 0) {
+      alert("serveur HS");
+    }
+  });*/
+
+////////////////////////appel FETCH avec ID//////////////////////////////////////////////////////
+
+/*const getProducts = async () => {
+  try {
+    //// try pour gérer les erreures d'éxécution, on y met le code suceptible à l'erreure////
+    let response = await fetch("http://localhost:3000/api/furniture/" + id); //// je veux que tu attendes de récup les données et de les parser, j'ajoute + iD pour récupérer l'ID produit///
+
+    if (response.ok) {
+      ////on vérifie si on a une réponse valide
+      let products = await response.json(); //// on attend la conversion du json en objet////
+      console.log(id);
+    } else {
+      console.error("Retour du serveur : ", response.status); //// retour du serveur type 404 par ex//
+    }
+  } catch (e) {
+    //// on capture l'erreure grace au try catch////
+    console.log(e);
+  }
+}; //// appel a getProduct pour envoyer les photos////
+
+getProducts();/////
+
+
+
 /////////////////////////////////////////RECUPERATION DE L'API///////////////////////////////////////////////////
 
 ////////////////////RECUPERATION DES PRODUITS DEPUIS DE SERVEUR////////////////////////
