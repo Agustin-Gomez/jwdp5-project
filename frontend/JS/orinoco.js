@@ -10,7 +10,7 @@ const getProducts = async () => {
       ////on vérifie si on a une réponse valide
       let products = await response.json(); //// on attend la conversion du json en objet////
       console.log(products);
-      displayAllProduct(products);
+      displayAllProduct(products); ////réponse donc contenant la fonction qui affiche la liste des produits sous forme de liste////
     } else {
       console.error("Retour du serveur : ", response.status); //// retour du serveur type 404 par ex//
     }
@@ -31,22 +31,32 @@ function displayAllProduct(products) {
 
   products.forEach((product) => {
     ////création du contenu de la div productList////
+
+    const divPrice = product.price / 100;
+
     carousel.innerHTML += `
               <div class="carousel-item">
                 <img class="d-block img-fluid" src="${product.imageUrl}" alt="${product.name}">
               </div>
 
     `;
+
     productList.innerHTML += `
 
          <div class="col-lg-4 col-md-6 mb-4" >
             <div class="card h-100">
-               <img class="card-img-top" src="${product.imageUrl}" alt="${product.name}">
-              <div class= "card-body "><a class="card-a" href="./produit.html?${product._id}"><h4 class="card-title">${product.name}</h4></a>
+               <img class="card-img-top" src="${product.imageUrl}" alt="${
+      product.name
+    }">
+              <div class= "card-body "><a class="card-a" href="./produit.html?id=${
+                product._id
+              }"><h4 class="card-title">${product.name}</h4></a>
                   <p class="card-text">${product.description}</p>
                    
               </div>   
-               <div class="card-footer"><h5 class="card-price">${product.price}</h5></div> 
+               <div class="card-footer"><h5 class="card-price">${divPrice.toFixed(
+                 2
+               )} €</h5></div> 
             </div>
         </div>
         `;

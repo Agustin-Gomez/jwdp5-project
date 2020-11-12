@@ -1,4 +1,32 @@
 /*
+
+const params = new URLSearchParams(window.location.search); /////La propriété location, de l'objet Javascript window, permet de récupérer la chaine de requêtes, on l'analyse ///
+const furnitureId = params.get("id"); ///retourne la premiere valeure associée au parametre de recherche donnée////
+console.log(furnitureId);
+
+//////////////////////////Requête fetch avec l'identifiant id////////////////////////////////
+
+const getOneId = async () => {
+  try {
+    //// try pour gérer les erreures d'éxécution, on y met le code suceptible à l'erreure////
+    let response = await fetch(
+      "http://localhost:3000/api/furniture/${furnitureId}"
+    ); //// je veux que tu attendes de récup les données et de les parser///
+
+    if (response.ok) {
+      ////on vérifie si on a une réponse valide
+      let furnitureId = await response.json(); //// on attend la conversion du json en objet////
+      console.log(furnitureId);
+      displayOneProduct(products);
+    } else {
+      console.error("Retour du serveur : ", response.status); //// retour du serveur type 404 par ex//
+    }
+  } catch (e) {
+    //// on capture l'erreure grace au try catch////
+    console.log(e);
+  }
+};
+
 /////
 /*function getId() {
   const param = window.location.search; /////La propriété location, de l'objet Javascript window, permet de récupérer la chaine de requêtes ///
@@ -173,4 +201,57 @@ const productList = async () => {
     //// on capture l'erreure grace au try catch////
     console.log(e);
   }
-};*/
+};*/ /*
+function displayOneProduct(products) {
+  ////je me place dans la div article////
+  const article = document.getElementById("article");
+  console.log(article);
+  const carousel = document.querySelector(".carousel-inner");
+
+  products.forEach((product) => {
+    ////création du contenu de la div article////
+    carousel.innerHTML += `
+              <div class="carousel-item">
+                <img class="d-block img-fluid" src="${product.imageUrl}" alt="${product.name}">
+              </div>
+
+    `;
+    article.innerHTML += `
+
+         <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <img class="card-img-top" src="${product.imageUrl}" alt="${product.name}" id="article-photo">
+                <div class="card-body">
+                 <a class="card-a" href="./produit.html?${product._id}"><h4 class="card-title">${product.name} id="nom-meuble"</h4></a>
+                  <h5 id="prix-meuble">${product.price}</h5>
+                 <p class="card-text" id="description-article" >${product.description}</p>
+                </div>
+                <div class="card-footer">
+                  <div class="dropdown">
+                    <div class="btn-group">
+                      <form>
+                        <label for="option_personnalisation">
+                          option de personnalisation</label
+                        >
+                        <select
+                          name="option_personnalisation"
+                          id="option_personnalisation" ${product.varnish}
+                        ></select>
+                      </form>
+                     
+                      <button
+                        type="button"
+                        class="btn btn-outline-success btn-sm mb-2"
+                        id="ajouter-au-panier"
+                      >
+                        Ajouter au panier
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        
+        `;
+  });
+}
+*/
