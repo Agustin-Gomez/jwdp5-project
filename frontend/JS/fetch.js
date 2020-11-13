@@ -1,3 +1,18 @@
+////creation choix du vernis////
+/*let option_personnalisation = document.getElementById(
+    "option_personnalisation"
+  );
+  let tableau_personnalisation = products.personnalisation;
+  for (let i = 0; i < tableau_personnalisation.length; i++) {
+    option_personnalisation.innerHTML +=
+      "<option>" + tableau_personnalisation[i] + "</option>";
+  }*/
+/*let varnish = "";
+  products.varnishes.forEach((vernis) => {
+    varnish += `<option value="${vernis}">${vernis}</option>`;
+    console.log(vernis);
+  });*/
+
 /*
 
 const params = new URLSearchParams(window.location.search); /////La propriété location, de l'objet Javascript window, permet de récupérer la chaine de requêtes, on l'analyse ///

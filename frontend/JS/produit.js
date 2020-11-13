@@ -15,26 +15,37 @@ console.log(furnitureId);
 //////////////////////////Requête fetch avec l'identifiant id////////////////////////////////
 
 const getProducts = async function () {
+  /// fonction de récupération des données sur le serveu////
   let response = await fetch(
+    /// on attend la résolution de la promesse////
     `http://localhost:3000/api/furniture/${furnitureId}`
   );
   let products = await response.json();
   console.log(products);
-
   displayOneProduct(products);
 };
-
 getProducts();
 
 ////////////////////////AFFICHAGE DU PRODUIT , injection dans le DOM //////////////
-
+/*const displayOneProduct = async () => {
+  const products = await getProducts();*/
 function displayOneProduct(products) {
-  ////je me place dans la div article////
+  console.log(displayOneProduct);
+
+  ///// creation d'une variable pour choisir l'option////
+  let option_personnalisation = document.getElementById(
+    "option_personnalisation"
+  );
+  let tableau_personnalisation = products.varnish;
+  for (let i = 0; i < tableau_personnalisation.length; i++) {
+    option_personnalisation.innerHTML +=
+      "<option>" + tableau_personnalisation[i] + "</option>";
+  }
+  ////division du prix par 100, plus bas : € rajouté////
+  const divPrice = products.price / 100;
+
   const article = document.getElementById("article");
   console.log(article);
-
-  ////création du contenu de la div article////
-  const divPrice = products.price / 100;
 
   article.innerHTML += `
 
@@ -46,10 +57,8 @@ function displayOneProduct(products) {
                 <div class="card-body">
                  <a class="card-a" href="./produit.html?${
                    products._id
-                 }"><h4 class="card-title">${
-    products.name
-  } id="nom-meuble"</h4></a>
-                  <h5 id="prix-meuble">${divPrice.toFixed(2)}</h5>
+                 }"><h4 class="card-title">${products.name}</h4></a>
+                  <h5 id="prix-meuble">${divPrice.toFixed(2)} €</h5>
                  <p class="card-text" id="description-article" >${
                    products.description
                  }</p>
