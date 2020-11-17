@@ -1,4 +1,20 @@
 ////creation choix du vernis////
+///// creation d'une variable pour choisir l'option////
+/*let option_personnalisation = document.getElementById(
+    "option_personnalisation"
+  );
+  let tableau_personnalisation = products.varnish;
+  for (let i = 0; i < tableau_personnalisation.length; i++) {
+    option_personnalisation.innerHTML +=
+      "<option>" + tableau_personnalisation[i] + "</option>";
+  }
+
+  ////Au clic du bouton panier je souhaite être redirigé vers la page panier////
+  let ajoutPanier = document.getElementById("ajouter-au-panier");
+  ajoutPanier.addEventListener("click", () => {
+    window.location = "./panier.html";
+  });*/
+
 /*let option_personnalisation = document.getElementById(
     "option_personnalisation"
   );

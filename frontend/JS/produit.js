@@ -20,47 +20,38 @@ const getProducts = async function () {
     /// on attend la résolution de la promesse////
     `http://localhost:3000/api/furniture/${furnitureId}`
   );
-  let products = await response.json();
-  console.log(products);
-  displayOneProduct(products);
+  let product = await response.json();
+  console.log(product);
+  displayOneProduct(product);
 };
 getProducts();
 
 ////////////////////////AFFICHAGE DU PRODUIT , injection dans le DOM //////////////
-/*const displayOneProduct = async () => {
-  const products = await getProducts();*/
-function displayOneProduct(products) {
+//
+
+function displayOneProduct(product) {
   console.log(displayOneProduct);
 
-  ///// creation d'une variable pour choisir l'option////
-  let option_personnalisation = document.getElementById(
-    "option_personnalisation"
-  );
-  let tableau_personnalisation = products.varnish;
-  for (let i = 0; i < tableau_personnalisation.length; i++) {
-    option_personnalisation.innerHTML +=
-      "<option>" + tableau_personnalisation[i] + "</option>";
-  }
   ////division du prix par 100, plus bas : € rajouté////
-  const divPrice = products.price / 100;
+  const divPrice = product.price / 100;
 
   const article = document.getElementById("article");
   console.log(article);
 
   article.innerHTML += `
 
-         <div class="col-lg-4 col-md-6 mb-4">
+         <div class="col-lg-12 col-md-6 mb-4">
               <div class="card h-100">
-                <img class="card-img-top" src="${products.imageUrl}" alt="${
-    products.name
+                <img class="card-img-top" src="${product.imageUrl}" alt="${
+    product.name
   }" id="article-photo">
                 <div class="card-body">
                  <a class="card-a" href="./produit.html?${
-                   products._id
-                 }"><h4 class="card-title">${products.name}</h4></a>
+                   product._id
+                 }"><h4 class="card-title">${product.name}</h4></a>
                   <h5 id="prix-meuble">${divPrice.toFixed(2)} €</h5>
                  <p class="card-text" id="description-article" >${
-                   products.description
+                   product.description
                  }</p>
                 </div>
                 <div class="card-footer">
@@ -72,14 +63,13 @@ function displayOneProduct(products) {
                         >
                         <select
                           name="option_personnalisation"
-                          id="option_personnalisation" ${products.varnish}
-                        ></select>
+                          id="option_personnalisation" ></select>
                       </form>
                      
                       <button
                         type="button"
                         class="btn btn-outline-success btn-sm mb-2"
-                        id="ajouter-au-panier"
+                        id="ajouter-au-panier" 
                       >
                         Ajouter au panier
                       </button>
@@ -89,4 +79,31 @@ function displayOneProduct(products) {
               </div>
         
         `;
+
+  ///fonction qui appel les options///
+  /*
+  let option = document.createElement("option");
+  let select = document.querySelector("select");
+
+  for (const option of product.varnish) {
+    select.innerHTML += `<option>${option}</option>`;
+  }*/
+
+  product.varnish.forEach(function (choixOption) {
+    console.log(choixOption);
+    let option = document.createElement("option");
+    let select = document.querySelector("select");
+
+    option.value = choixOption;
+    option.textContent = choixOption;
+    select.appendChild(option);
+  });
+
+  ////Au clic du bouton panier je souhaite être redirigé vers la page panier////
+  let ajoutPanier = document.getElementById("ajouter-au-panier"); ///
+  ajoutPanier.addEventListener("click", () => {
+    //// addevent qui prévoit 2 arguments: l'évènement et la fonction à executer///
+    window.location = "./panier.html";
+    console.log(ajourPanier);
+  });
 }
