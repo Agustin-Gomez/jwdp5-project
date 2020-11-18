@@ -37,3 +37,7 @@ h3 {
 a {
   color: #bf502f;
 }
+
+.mt-4 {
+  margin-top: 1.5rem !important;
+}

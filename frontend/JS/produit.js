@@ -40,8 +40,8 @@ function displayOneProduct(product) {
 
   article.innerHTML += `
 
-         <div class="col-lg-12 col-md-6 mb-4">
-              <div class="card h-100">
+         
+              
                 <img class="card-img-top" src="${product.imageUrl}" alt="${
     product.name
   }" id="article-photo">
@@ -70,13 +70,15 @@ function displayOneProduct(product) {
                         type="button"
                         class="btn btn-outline-success btn-sm mb-2"
                         id="ajouter-au-panier" 
+     
+
                       >
                         Ajouter au panier
                       </button>
                     </div>
                   </div>
                 </div>
-              </div>
+              </>
         
         `;
 

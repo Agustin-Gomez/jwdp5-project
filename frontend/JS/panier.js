@@ -64,27 +64,40 @@ function ajoutLocalStorage() {
 
   ajoutLocalStorage();
 }
-////////////
-/*function displayAllProduct(products) {
+
+//////ajout d'un article au panier//////
+
+function displayAllProduct(products) {
   if (localStorage.length > 0) {
     let products = JSON.parse(localStorage.getItem("card"));
     console.log(data);
     let card = document.getElementById("card");
     console.log(card);
+
+    const divPrice = product.price / 100;
+
     products.forEach((product) => {
+      //// je sais pas ou mettre mes place holders , je dois creer mes div..../////
       card.innerHTML += `
            
       <h2>Détail de votre panier</h2>
       <table class="table table-bordered" id="resume_panier">
         <thead>
           <tr>
-            <th scope="col">Article</th>
-            <th scope="col">Prix</th>
-            <th scope="col">Quantité</th>
+            <th scope="col">article</th>
+            <th scope="col">prix</th>
+            <th scope="col">quantité</th>
             <th scope="col">Prix total</th>
           </tr>
         </thead>
-        <tbody id="resume_panier_test"></tbody>
+        <tbody id="resume_panier_test">
+        <div class="image">${product.imageUrl}</div>
+                  <div class="prix">${divPrice.toFixed(2)}</div>
+                  <div class="quantité">${1}</div>
+                  <div class="Prixtotal">$</div>
+                  <div class="supprimer"></div>
+        
+        </tbody>
       </table>
       <div class="col-md-12 text-center" id="erreur_panier">
         <p>Vous n'avez pas de commande</p>
@@ -97,8 +110,8 @@ function ajoutLocalStorage() {
   } else {
     card.innerHTML = `
         <tbody id="resume_panier_test">
-        <img class="center-block gif" alt="" src="images/polizas_gif.gif" />
+        
             <p class="text-center lead">Votre panier est vide :'(</p>
         </tbody>`;
   }
-}*/
+}

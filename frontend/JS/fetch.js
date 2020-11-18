@@ -286,3 +286,6 @@ function displayOneProduct(products) {
   });
 }
 */
+/*<img src="${product.imageUrl}" alt="${product.name}" id="article-photo">
+        <div>${divPrice.toFixed(2)} €</div>
+        <div>${1}</div></img>*/
