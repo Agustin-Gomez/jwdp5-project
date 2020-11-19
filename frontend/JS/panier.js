@@ -30,8 +30,10 @@ function displayCart() {
             `;
 
     let resumePanier = document.querySelector("#resume_panier_test");
+
     products.forEach((product, index) => {
       total = total + product.price * product.quantity;
+
       const divPrice = product.price / 100;
 
       resumePanier.InnerHTML += `

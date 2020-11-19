@@ -89,15 +89,15 @@ function displayOneProduct(product) {
   }*/
 
   ////evnt click qui lance la fonction d'ajout au panier hop hop hop  /////
-  let AddToCartBtn = document.querySelector("#addToCart");
+  let addToCartBtn = document.querySelector("#addToCart");
 
-  AddToCartBtn.addEventListener("click", () => {
+  addToCartBtn.addEventListener("click", () => {
     let select = document.querySelector(".product-section_select");
     product.selectedVarnish = select.options[select.selectedIndex].value; ////LONG qui représente lindex du premier element selectionnée ////
     ////La propriété selectedIndex  renvoie l'index de l'option sélectionnée dans une liste déroulante.///
     window.location = "./panier.html"; ////Au clic du bouton panier je souhaite être redirigé vers la page panier////
     console.log(AddToCartBtn);
-    AddToCartBtn(product);
+    addToCart(product);
   });
 
   ///fonction qui appel les options avec FOR OF///
