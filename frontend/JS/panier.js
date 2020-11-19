@@ -1,59 +1,40 @@
-/*let card = document.getElementById("card");
-console.log(card);
+//////////////////////////////////création de la fonction ajout au local storage/////////////////////////////////////////////////////////
 
-//// fonction setPanier pour stocker  un produit////
-function setPanier() {
-  localStorage.setItem("card", JSON.stringify("card")); /// la fonction setPanier crée un objet de stockage avec clé et valeur////
-  updatePanier();
-  console.log(setPanier); ///*/
-/*}*/
-//le 1er argument est la clé et précise lendroit ou les données sont stockées///
-////récupération du produit////
-/*
-function addToBasket() {
-  let basketContent = JSON.parse(localStorage.getItem("basketContent")); //// on récupere la clé basketC/////
-  console.log(basketContent);
-  if (basketContent === null) {
-    basketContent = [];
-  }
-  let product = new product(id, varnishSelected); /// JE SOUHAITE AJOUTER UN PRODUIT AU PANIER sil nya rien dedans////
-  basketContent.push(product);
-  localStorage.setItem("basketContent", JSON.stringify(basketContent)); /// en chaine de caractere////
-}*/
-
-//////création de la fonction pour l'ajout au local storage/////////////
-
-function ajoutLocalStorage() {
-  // stockage des données du produit ajouté ,dans un objet////
+function addToCart(product) {
+  let cartProducts = []; ///////tableau vide au départ qui contiendra  les données du produit ajouté////////
   let saveToCartProduct = {
+    //////données du produit ajouté.on initialise ici l'objet avec un ensemble de propriétés, liste de clé valeur, séparées par des ,///////////
+
     _id: product._id,
     imageUrl: product.imageUrl,
     name: product.name,
     price: product.price,
-    quantity: 1,
-    choixOption: product.varnish,
+    quantity: 1, ////// qtité max de produit que lon met dans le local storage/////
+    selectedVarnish: product.selectedvarnish,
   };
+  console.log(saveToCartProduct);
 
-  let newDifferentProduct = true;
+  let newDifferentProduct = true; ///Boolean newdif  dans le cas ou jai un nouveau produit /////
 
   if (localStorage.getItem("cartProducts") === null) {
-    //// cartProducts tableau vide qui contiendra les données du produit ajoutés savetoCp///////
-    ///Si le localStorage est vide elle crée un nouveau tableau cartProducts et l'enregistre dans le localStorage ////
-    console.log(cartProducts);
-    cartProducts.push(saveToCartProduct);
-    localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
+    ///Si le localStorage est vide la fonction crée un nouveau tableau cartProducts et l'enregistre dans le localStorage ////
+    console.log(cartProducts); /// getitem renvoie la valeur associée à la clé cartproducts////
+    cartProducts.push(saveToCartProduct); ///on ajoute au tableau Save avec les données du new produit  avec push/////
+    localStorage.setItem("cartProducts", JSON.stringify(cartProducts)); //nom de la clé cartproduct et sa valeur, le JSON Stringify convertit le tableau en chaine car SET est string//////
   } else {
-    ////Sinon elle récupère le tableau du localStorage, ajoute le nouveau produit, et enregistre le nouveau tableau//////
+    ////Sinon la fonction récupère le tableau du localStorage, ajoute le nouveau produit, et enregistre le nouveau tableau//////
 
-    cartProducts = JSON.parse(localStorage.getItem("cartProducts")); // je recup le tableau du LS/////
+    cartProducts = JSON.parse(localStorage.getItem("cartProducts")); // je recup le tableau du LS get renvoie la valeure associée à la clé cardproducts/////
 
     cartProducts.forEach((prod) => {
-      ///boucle sur chaque produit si yen a pas de nouveaux on peu augmenter sa quantité//////
-      //// ajout du nouveau produit////
-      if (product._id === prod._id && product.varnish === prod.varnish) {
-        /// si on change pas de produit///
+      ///boucle sur chaque produit si yen a pas de nouveaux quil ya deja un produit au panier,  on peu augmenter sa quantité//////
+      //// ajout du nouveau produit//// //// prod =/////
+      if (
+        product._id === prod._id && /// on vérifie que les 2 consitions st ttes 2 vraies///////egalité stricte on vérifie la valeure et le type//////
+        product.selectedVarnish === prod.selectedVarnish
+      ) {
         prod.quantity++; /// on peut augmenter sa quantité///
-        newDifferentProduct = false; //// il nay pas de nouveau produit////
+        newDifferentProduct = false; //// il nya pas de nouveau produit////
       }
     });
 
@@ -62,40 +43,40 @@ function ajoutLocalStorage() {
     localStorage.setItem("cartProducts", JSON.stringify(cartProducts)); //////////// on stocke les nouvelles données////
   }
 
-  ajoutLocalStorage();
+  chekPanier();
+  alert("Votre produit a bien été ajouté au panier");
 }
 
 //////ajout d'un article au panier//////
-
-function displayAllProduct(products) {
+/*
+function addAproduct(product) {
   if (localStorage.length > 0) {
-    let products = JSON.parse(localStorage.getItem("card"));
-    console.log(data);
-    let card = document.getElementById("card");
-    console.log(card);
+    let product = JSON.parse(localStorage.getItem("cartProducts"));
+    console.log(cartProducts);
+    const basket = document.querySelector(".card mt-4");
+    console.log(basket);
 
     const divPrice = product.price / 100;
+    const totalPrice = x;
 
-    products.forEach((product) => {
+    product.forEach((product) => {
       //// je sais pas ou mettre mes place holders , je dois creer mes div..../////
-      card.innerHTML += `
+      basket.innerHTML += `
            
       <h2>Détail de votre panier</h2>
       <table class="table table-bordered" id="resume_panier">
         <thead>
           <tr>
-            <th scope="col">article</th>
-            <th scope="col">prix</th>
-            <th scope="col">quantité</th>
-            <th scope="col">Prix total</th>
+           <th scope="col" class="produit">Article</th>
+                  <th scope="col" class="description">Prix</th>
+                  <th scope="col" class="quantité">Quantité</th>
+                  <th scope="col" class="prixtotal">Prix total</th>
+                  <th scope="col" class="supprime"></th>
           </tr>
         </thead>
         <tbody id="resume_panier_test">
-        <div class="image">${product.imageUrl}</div>
-                  <div class="prix">${divPrice.toFixed(2)}</div>
-                  <div class="quantité">${1}</div>
-                  <div class="Prixtotal">$</div>
-                  <div class="supprimer"></div>
+        <td></td>
+        
         
         </tbody>
       </table>
@@ -106,7 +87,6 @@ function displayAllProduct(products) {
     </div>;
             `;
     });
-    //////dans la fonction je fais comme la page produit  en bas utlisatio nde la for i je traduit ca en for of///////
   } else {
     card.innerHTML = `
         <tbody id="resume_panier_test">
@@ -114,4 +94,4 @@ function displayAllProduct(products) {
             <p class="text-center lead">Votre panier est vide :'(</p>
         </tbody>`;
   }
-}
+}*/

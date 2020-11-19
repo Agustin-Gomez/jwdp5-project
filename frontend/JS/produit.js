@@ -58,21 +58,18 @@ function displayOneProduct(product) {
                   <div class="dropdown">
                     <div class="btn-group">
                       <form>
-                        <label for="option_personnalisation">
-                          option de personnalisation</label
+                        <label for="varnish-select">
+                          type de vernis</label
                         >
-                        <select
-                          name="option_personnalisation"
-                          id="option_personnalisation" ></select>
+                        <select class=" product-section_select"
+                          name="product-section_select"
+                          id="varnish-select" ></select>
                       </form>
                      
                       <button
                         type="button"
                         class="btn btn-outline-success btn-sm mb-2"
-                        id="ajouter-au-panier" 
-     
-
-                      >
+                        id="addToCart" >
                         Ajouter au panier
                       </button>
                     </div>
@@ -82,7 +79,7 @@ function displayOneProduct(product) {
         
         `;
 
-  ///fonction qui appel les options///
+  ///fonction qui appel les options avec FOR OF///
   /*
   let option = document.createElement("option");
   let select = document.querySelector("select");
@@ -91,21 +88,35 @@ function displayOneProduct(product) {
     select.innerHTML += `<option>${option}</option>`;
   }*/
 
-  product.varnish.forEach(function (choixOption) {
+  ////evnt click qui lance la fonction d'ajout au panier hop hop hop  /////
+  let AddToCartBtn = document.querySelector("#addToCart");
+
+  AddToCartBtn.addEventListener("click", () => {
+    let select = document.querySelector("select");
+    product.selectedVarnish = select.options[select.selectedIndex].value; ////LONG qui représente lindex du premier element selectionnée ////
+    ////La propriété selectedIndex  renvoie l'index de l'option sélectionnée dans une liste déroulante.///
+    window.location = "./panier.html"; ////Au clic du bouton panier je souhaite être redirigé vers la page panier////
+    console.log(AddToCartBtn);
+    AddToCartBtn(product);
+  });
+
+  ///fonction qui appel les options avec FOR OF///
+
+  let option = document.createElement("option");
+  let select = document.querySelector(".product-section_select");
+
+  for (const option of product.varnish) {
+    ////for (variable of itérable) {instruction}= a chaque itération product.varnish est lobjet dt on parcours les propriétés/////
+    select.innerHTML += `<option>${option}</option>`;
+  }
+
+  /* product.varnish.forEach(function (varnish) {
     console.log(choixOption);
     let option = document.createElement("option");
-    let select = document.querySelector("select");
+    let select = document.querySelector(".product-section_select");
 
-    option.value = choixOption;
-    option.textContent = choixOption;
+    option.value = varnish;
+    option.textContent = varnish;
     select.appendChild(option);
-  });
-
-  ////Au clic du bouton panier je souhaite être redirigé vers la page panier////
-  let ajoutPanier = document.getElementById("ajouter-au-panier"); ///
-  ajoutPanier.addEventListener("click", () => {
-    //// addevent qui prévoit 2 arguments: l'évènement et la fonction à executer///
-    window.location = "./panier.html";
-    console.log(ajourPanier);
-  });
+  });*/
 }

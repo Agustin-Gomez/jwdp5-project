@@ -75,41 +75,30 @@
       <div class="row">
         <div class="col-lg-3">
           <h1 class="my-4">Orinoco, nos meubles en chênes</h1>
-          <!-- <div class="list-group">
-            <a href="#" class="list-group-item">Petite table faite main</a>
-            <a href="#" class="list-group-item"
-              >Grande table en chêne rectangulaire</a
-            >
-            <a href="#" class="list-group-item">Belle table ronde</a>
-            <a href="#" class="list-group-item">Banc chêne brut</a>
-            <a href="#" class="list-group-item"
-              >La chaise vintage chêne brute</a
-            >
-          </div>-->
         </div>
         <!-- /.col-lg-3 -->
 
         <div class="col-lg-9">
-          <!--<div class="row">-->
-          <!-- <div class="col-lg-4 col-md-6 mb-4">-->
-
           <div class="card mt-4 <!--h-100-->">
             <h2>Détail de votre panier</h2>
             <table class="table table-bordered" id="resume_panier">
               <thead>
                 <tr>
-                  <th scope="col">Article</th>
-                  <th scope="col">Prix</th>
-                  <th scope="col">Quantité</th>
-                  <th scope="col">Prix total</th>
+                  <th scope="col" class="produit">Article</th>
+                  <th scope="col" class="description">Prix</th>
+                  <th scope="col" class="quantité">Quantité</th>
+                  <th scope="col" class="prixtotal">Prix total</th>
+                  <th scope="col" class="supprime"></th>
                 </tr>
               </thead>
               <tbody id="resume_panier_test">
-                <div class="image"></div>
-                <div class="prix"></div>
-                <div class="quantité"></div>
-                <div class="Prixtotal"></div>
-                <div class="supprimer"></div>
+                <tr>
+                  <td class="produit"></td>
+                  <td class="description"></td>
+                  <td class="quantité"></td>
+                  <td class="prixtotal"></td>
+                  <td class="supprime"></td>
+                </tr>
               </tbody>
             </table>
             <div class="col-md-12 text-center" id="erreur_panier">
@@ -117,7 +106,6 @@
             </div>
           </div>
 
-          <!-- <div class="col-lg-4 col-md-6 mb-4">-->
           <div class="card card-outline-secondary my-4 <!--h-100-->">
             <h2>
               Pour pouvoir valider votre commande merci de remplir tous les
