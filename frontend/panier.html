@@ -79,30 +79,55 @@
         <!-- /.col-lg-3 -->
 
         <div class="col-lg-9">
-          <div class="card mt-4 <!--h-100-->">
+          <div class="card mt-4">
             <h2>Détail de votre panier</h2>
             <table class="table table-bordered" id="resume_panier">
               <thead>
                 <tr>
                   <th scope="col" class="produit">Article</th>
-                  <th scope="col" class="description">Prix</th>
+                  <th scope="col" class="description">Nom</th>
                   <th scope="col" class="quantité">Quantité</th>
-                  <th scope="col" class="prixtotal">Prix total</th>
-                  <th scope="col" class="supprime"></th>
+                  <th scope="col" class="prix">Prix</th>
+                  <th scope="col" class="supprimer">Supprimer</th>
                 </tr>
               </thead>
+              <tfoot class="thetotal">
+                <tr class="totalPrice">
+                  <td class="bigprice">Prix total</td>
+                </tr>
+              </tfoot>
               <tbody id="resume_panier_test">
                 <tr>
-                  <td class="produit"></td>
-                  <td class="description"></td>
+                  <td class="produit">
+                    <img
+                      class="card-img-top"
+                      src=""
+                      alt=""
+                      id="article-photo"
+                    />
+                  </td>
+
+                  <td class="description"><h4 class="card-title"></h4></td>
                   <td class="quantité"></td>
-                  <td class="prixtotal"></td>
-                  <td class="supprime"></td>
+                  <td class="prix"></td>
+                  <td class="supprimer">
+                    <button
+                      type="button"
+                      class="btn btn-outline-success btn-sm mb-2"
+                      id="supprimePanier"
+                    >
+                      Supprimer du panier
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             </table>
             <div class="col-md-12 text-center" id="erreur_panier">
-              <p>Vous n'avez pas de commande</p>
+              <p class="cart_vide">
+                Votre panier est vide!
+                <br />
+                <a href="./index.html">Revenir à la page d'accueil</a>
+              </p>
             </div>
           </div>
 

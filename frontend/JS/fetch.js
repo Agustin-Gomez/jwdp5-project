@@ -289,3 +289,20 @@ function displayOneProduct(products) {
 /*<img src="${product.imageUrl}" alt="${product.name}" id="article-photo">
         <div>${divPrice.toFixed(2)} €</div>
         <div>${1}</div></img>*/
+
+/*
+tr page panier
+<tr>
+        
+        <td scope="col" class="produit"><img class="card-img-top" src="${
+          product.imageUrl
+        }" alt="${product.name}" id="article-photo">
+                <a class="card-a" href="./produit.html?${
+                  product._id
+                }"><h4 class="card-title">${product.name}</h4></a></td>
+                  <td class="description">${divPrice.toFixed(2)}</td>
+                  <td class="quantité">${quantity}</td>
+                  <td class="prixtotal"></td>
+                  <td class="supprime"></td>
+        </tr>
+        */
