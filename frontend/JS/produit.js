@@ -26,7 +26,7 @@ const getProducts = async function () {
 };
 getProducts();
 
-////////////////////////AFFICHAGE DU PRODUIT , injection dans le DOM //////////////
+////////////////////////////////////////////AFFICHAGE DU PRODUIT , injection dans le DOM //////////////////////////////////////////////
 //
 
 function displayOneProduct(product) {
@@ -34,6 +34,10 @@ function displayOneProduct(product) {
 
   ////division du prix par 100, plus bas : € rajouté////
   const divPrice = product.price / 100;
+  const goodPrice = divPrice.toLocaleString("fr-FR", {
+    style: "currency",
+    currency: "EUR",
+  });
 
   const article = document.getElementById("article");
   console.log(article);
@@ -42,17 +46,11 @@ function displayOneProduct(product) {
 
          
               
-                <img class="card-img-top" src="${product.imageUrl}" alt="${
-    product.name
-  }" id="article-photo">
+                <img class="card-img-top" src="${product.imageUrl}" alt="${product.name}" id="article-photo">
                 <div class="card-body">
-                 <a class="card-a" href="./produit.html?${
-                   product._id
-                 }"><h4 class="card-title">${product.name}</h4></a>
-                  <h5 id="prix-meuble">${divPrice.toFixed(2)} €</h5>
-                 <p class="card-text" id="description-article" >${
-                   product.description
-                 }</p>
+                 <a class="card-a" href="./produit.html?${product._id}"><h4 class="card-title">${product.name}</h4></a>
+                  <h5 id="prix-meuble">${goodPrice}</h5>
+                 <p class="card-text" id="description-article" >${product.description}</p>
                 </div>
                 <div class="card-footer">
                   <div class="dropdown">
@@ -79,34 +77,30 @@ function displayOneProduct(product) {
         
         `;
 
-  ///fonction qui appel les options avec FOR OF///
-  /*
-  let option = document.createElement("option");
-  let select = document.querySelector("select");
+  /////////evnt click qui lance la fonction  de callback  d'ajout au panier avec le vernis selectionné hop hop hop  ////////
 
-  for (const option of product.varnish) {
-    select.innerHTML += `<option>${option}</option>`;
-  }*/
-
-  ////evnt click qui lance la fonction d'ajout au panier hop hop hop  /////
   let addToCartBtn = document.querySelector("#addToCart");
+  console.log(addToCart);
 
   addToCartBtn.addEventListener("click", () => {
     let select = document.querySelector(".product-section_select");
-    product.selectedVarnish = select.options[select.selectedIndex].value; ////LONG qui représente lindex du premier element selectionnée ////
+    product.selectedVarnish = select.options[select.selectedIndex].value; ////[]qui représente lindex du premier element selectionnée option dans lelemetn html select //// ////Au clic du bouton panier je souhaite être redirigé vers la page panier////
     ////La propriété selectedIndex  renvoie l'index de l'option sélectionnée dans une liste déroulante.///
-    window.location = "./panier.html"; ////Au clic du bouton panier je souhaite être redirigé vers la page panier////
+    window.location = "./panier.html";
     console.log(AddToCartBtn);
-    addToCart(product);
+
+    addToCart(product); /// on appel la fonction ajout de produit au local storage /////
   });
 
-  ///fonction qui appel les options avec FOR OF///
+  //////////creation du déroullant avec les options avec  FOR OF////////
 
   let option = document.createElement("option");
   let select = document.querySelector(".product-section_select");
 
   for (const option of product.varnish) {
-    ////for (variable of itérable) {instruction}= a chaque itération product.varnish est lobjet dt on parcours les propriétés/////
+    ///// la boucle me permet de parcourir les différentes propriété dc les diff vernis de mon objet product.varnish en créant un menu deroul avec
+    //les différentes options////
+
     select.innerHTML += `<option>${option}</option>`;
   }
 
@@ -120,7 +114,7 @@ function displayOneProduct(product) {
     select.appendChild(option);
   });*/
 }
-//////////////////////////////////création de la fonction ajout au local storage/////////////////////////////////////////////////////////
+///////////////////////////////////////////création de la fonction ajout de produit au local storage/////////////////////////////////////////////////////////
 
 function addToCart(product) {
   let cartProducts = []; ///////tableau vide au départ qui contiendra  les données du produit ajouté////////
@@ -165,6 +159,6 @@ function addToCart(product) {
     localStorage.setItem("cartProducts", JSON.stringify(cartProducts)); //////////// on stocke les nouvelles données////
   }
 
-  chekPanier();
+  /// chekPanier();faudrait faire une focntion pour afficher le nbr de produit et verif quil yai un produit dans le panier///
   alert("Votre produit a bien été ajouté au panier");
 }

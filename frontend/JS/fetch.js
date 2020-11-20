@@ -306,3 +306,16 @@ tr page panier
                   <td class="supprime"></td>
         </tr>
         */
+const number = 123456.789;
+
+console.log(
+  new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(
+    number
+  )
+);
+// expected output: "123.456,79 €"
+const divPrice = product.price / 100;
+new Intl.NumberFormat("de-DE", {
+  style: "currency",
+  currency: "EUR",
+}).format(divPrice);

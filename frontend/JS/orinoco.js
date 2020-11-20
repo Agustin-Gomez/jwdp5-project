@@ -33,6 +33,10 @@ function displayAllProduct(products) {
     ////création du contenu de la div productList////
 
     const divPrice = product.price / 100;
+    const goodPrice = divPrice.toLocaleString("fr-FR", {
+      style: "currency",
+      currency: "EUR",
+    });
 
     carousel.innerHTML += `
               <div class="carousel-item">
@@ -45,18 +49,12 @@ function displayAllProduct(products) {
 
          <div class="col-lg-4 col-md-6 mb-4" >
             <div class="card h-100">
-               <img class="card-img-top" src="${product.imageUrl}" alt="${
-      product.name
-    }">
-              <div class= "card-body "><a class="card-a" href="./produit.html?id=${
-                product._id
-              }"><h4 class="card-title">${product.name}</h4></a>
+               <img class="card-img-top" src="${product.imageUrl}" alt="${product.name}">
+              <div class= "card-body "><a class="card-a" href="./produit.html?id=${product._id}"><h4 class="card-title">${product.name}</h4></a>
                   <p class="card-text">${product.description}</p>
                    
               </div>   
-               <div class="card-footer"><h5 class="card-price">${divPrice.toFixed(
-                 2
-               )} €</h5></div> 
+               <div class="card-footer"><h5 class="card-price">${goodPrice}</h5></div> 
             </div>
         </div>
         `;
