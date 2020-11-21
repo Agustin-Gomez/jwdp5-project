@@ -306,7 +306,7 @@ tr page panier
                   <td class="supprime"></td>
         </tr>
         */
-const number = 123456.789;
+/*const number = 123456.789;
 
 console.log(
   new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(
@@ -318,4 +318,56 @@ const divPrice = product.price / 100;
 new Intl.NumberFormat("de-DE", {
   style: "currency",
   currency: "EUR",
-}).format(divPrice);
+}).format(divPrice);*/
+/*function carousel()
+
+let active = 0;
+listeImages = document.querySelectorAll(carousel-item);
+
+let taille = listeImages.lenght;
+
+
+
+for (i=0;i<taille;i++)
+{
+
+  if (i!=active){
+    listeImages.item(i).classList.add("inactive");
+  }
+}*/
+
+/*<h2>Détail de votre panier</h2>
+      <table class="table table-bordered" id="resume_panier">
+        <thead>
+          <tr>
+           <th scope="col" class="produit">Article</th>
+                  <th scope="col" class="description">Nom</th>
+                  <th scope="col" class="vernis">Vernis</th>
+                  <th scope="col" class="quantité">Quantité</th>
+                  <th scope="col" class="prix">Prix </th>
+                  <th scope="col" class="supprimer">Supprimer</th>
+          </tr>
+        </thead>
+        <tbody id="resume_panier_test">
+        
+        
+        </tbody>
+      </table>*/
+/*<tr>
+              <td class="produit"><img class="card-img-top" src="${
+                product.imageUrl
+              }" alt="photo meuble" id="article-photo"></td>
+              <td class="description">${product.name}</td> 
+                <td>${product.selectedVarnish}</td>
+               <td class="quantité">
+                    <button class="cart_remove">
+                      -
+                    </button>${product.quantity}
+                    <button class="cart_add">
+                      +
+                    </button>
+                  </td>
+              <td class="prix">${goodPrice * divQuantity}</td>
+             <td class="supprimer"><button id="supprimePanier">X</button></td>
+    
+        </tr> `;*/

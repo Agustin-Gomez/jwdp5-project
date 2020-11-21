@@ -29,6 +29,18 @@ function displayAllProduct(products) {
   console.log(productList);
   const carousel = document.querySelector(".carousel-inner");
 
+  let active = 0; // on définit limage active///
+  let listeImages = document.querySelectorAll("img"); /// on récupere toutes les images////
+
+  let taille = listeImages.lenght; /// on recup la taille de la liste///
+
+  for (i = 0; i < taille; i++) {
+    /////on désactive toutes les images sauf une///
+    if (i != active) {
+      listeImages.item(i).classList.add("inactive");
+    }
+  }
+
   products.forEach((product) => {
     ////création du contenu de la div productList////
 
@@ -42,6 +54,7 @@ function displayAllProduct(products) {
               <div class="carousel-item">
                 <img class="d-block img-fluid" src="${product.imageUrl}" alt="${product.name}">
               </div>
+              
 
     `;
 

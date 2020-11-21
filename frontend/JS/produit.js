@@ -67,7 +67,7 @@ function displayOneProduct(product) {
                       <button
                         type="button"
                         class="btn btn-outline-success btn-sm mb-2"
-                        id="addToCart" >
+                        id="ajouter-au-panier" >
                         Ajouter au panier
                       </button>
                     </div>
@@ -79,17 +79,19 @@ function displayOneProduct(product) {
 
   /////////evnt click qui lance la fonction  de callback  d'ajout au panier avec le vernis selectionné hop hop hop  ////////
 
-  let addToCartBtn = document.querySelector("#addToCart");
-  console.log(addToCart);
+  let addToCartBtn = document.querySelector("#ajouter-au-panier");
+  console.log(addToCartBtn);
 
   addToCartBtn.addEventListener("click", () => {
     let select = document.querySelector(".product-section_select");
+    let addToCartBtn = document.querySelector("#ajouter-au-panier");
+    console.log(addToCartBtn);
     product.selectedVarnish = select.options[select.selectedIndex].value; ////[]qui représente lindex du premier element selectionnée option dans lelemetn html select //// ////Au clic du bouton panier je souhaite être redirigé vers la page panier////
     ////La propriété selectedIndex  renvoie l'index de l'option sélectionnée dans une liste déroulante.///
     window.location = "./panier.html";
-    console.log(AddToCartBtn);
+    console.log(addToCartBtn);
 
-    addToCart(product); /// on appel la fonction ajout de produit au local storage /////
+    ajouterAuPanier(product); /// on appel la fonction ajout de produit au local storage /////
   });
 
   //////////creation du déroullant avec les options avec  FOR OF////////
@@ -116,7 +118,7 @@ function displayOneProduct(product) {
 }
 ///////////////////////////////////////////création de la fonction ajout de produit au local storage/////////////////////////////////////////////////////////
 
-function addToCart(product) {
+function ajouterAuPanier(product) {
   let cartProducts = []; ///////tableau vide au départ qui contiendra  les données du produit ajouté////////
   let saveToCartProduct = {
     //////données du produit ajouté.on initialise ici l'objet avec un ensemble de propriétés, liste de clé valeur, séparées par des ,///////////
@@ -143,6 +145,7 @@ function addToCart(product) {
     cartProducts = JSON.parse(localStorage.getItem("cartProducts")); // je recup le tableau du LS get renvoie la valeure associée à la clé cardproducts/////
 
     cartProducts.forEach((prod) => {
+      console.log(prod);
       ///boucle sur chaque produit si yen a pas de nouveaux quil ya deja un produit au panier,  on peu augmenter sa quantité//////
       //// ajout du nouveau produit//// //// prod =/////
       if (
