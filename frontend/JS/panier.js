@@ -1,6 +1,7 @@
 //////////////////////////////////////////////////Ajout d'un article sur la page panier///////////////////////////////////////////////////////////////////
 let addBasket = document.querySelector("#monpanier");
 console.log(addBasket);
+
 let total = 0;
 
 displayCart();
@@ -43,24 +44,26 @@ function displayCart() {
 
     let resumePanier = document.querySelector("#resume_panier_test");
     console.log(resumePanier);
-
+    console.log(products);
     products.forEach((product) => {
       //////////////je créée une boucle for each: pour chaque produit ajouté jaurais l'ensemble des propriétés et possibilité de le supprimé daugmenter sa quantité/////////////
-      total = total + product.price * product.quantity;
 
       const divPrice = product.price / 100;
+
       const goodPrice = divPrice.toLocaleString("fr-FR", {
         style: "currency",
         currency: "EUR",
       });
-      const divQuantity = product.quantity / 100;
 
-      resumePanier.InnerHTML += `
+      const divQuantity = product.quantity / 100;
+      console.log(resumePanier);
+
+      resumePanier.innerHTML += `
          <tr>
                   <td class="produit">
                     <img
                       class="card-img-top"
-                      src="${product.imageUrl}
+                      src="${product.imageUrl}"
                       alt="photo meuble"
                       id="article-photo"
                     />
@@ -81,7 +84,8 @@ function displayCart() {
                     >
                       x
                     </button>
-                  </td> `;
+                  </td>
+                   `;
     });
   } else {
     const mistackingCart = document.querySelector("#erreur_panier");

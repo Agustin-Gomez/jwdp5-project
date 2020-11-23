@@ -30,14 +30,12 @@ function displayAllProduct(products) {
   const carousel = document.querySelector(".carousel-inner");
 
   let active = 0; // on définit limage active///
-  let listeImages = document.querySelectorAll("img"); /// on récupere toutes les images////
-
-  let taille = listeImages.lenght; /// on recup la taille de la liste///
-
-  for (i = 0; i < taille; i++) {
+  let listeImages = document.querySelectorAll(".carousel-item"); /// on récupere toutes les images////
+  console.log(listeImages);
+  for (i = 0; i < listeImages.lenght; i++) {
     /////on désactive toutes les images sauf une///
-    if (i != active) {
-      listeImages.item(i).classList.add("inactive");
+    if (i == active) {
+      listeImages.item(i).classList.add("active");
     }
   }
 

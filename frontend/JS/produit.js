@@ -1,11 +1,3 @@
-// il faut récupérer l'ID dans l'url//  get /:_id ,récupération du produit et il faut quil puisse s'afficher//
-// ajouter le produit dans le panier avec le vernis choisis//
-//il faut pouvoir choisir un vernis//
-//il faut pouvoir etre redirigé vers la page panier//
-// comme page accueil ajout de la photo titre prix description==> doivent correspondrent  a 1 produit  boutons option et panier//
-// on peu creer un alerte ajout au panier pour avertir le client que son action a bien été prise en compte//
-//local storage :stocker des données en cache pour meilleure performance , experience utilisateur , quand on ajoute au panier: ajout au localstorage//
-
 ///////////////////////////Récupération de l'ID  utilisation des paramètres de l'url(variable d'URL)/////////////////////////////////
 
 const params = new URLSearchParams(window.location.search); /////La propriété location, de l'objet Javascript window, permet de récupérer la chaine de requêtes, on l'analyse ///
@@ -27,7 +19,6 @@ const getProducts = async function () {
 getProducts();
 
 ////////////////////////////////////////////AFFICHAGE DU PRODUIT , injection dans le DOM //////////////////////////////////////////////
-//
 
 function displayOneProduct(product) {
   console.log(displayOneProduct);
@@ -57,7 +48,7 @@ function displayOneProduct(product) {
                     <div class="btn-group">
                       <form>
                         <label for="varnish-select">
-                          type de vernis</label
+                          Type de vernis</label
                         >
                         <select class=" product-section_select"
                           name="product-section_select"
@@ -86,7 +77,8 @@ function displayOneProduct(product) {
     let select = document.querySelector(".product-section_select");
     let addToCartBtn = document.querySelector("#ajouter-au-panier");
     console.log(addToCartBtn);
-    product.selectedVarnish = select.options[select.selectedIndex].value; ////[]qui représente lindex du premier element selectionnée option dans lelemetn html select //// ////Au clic du bouton panier je souhaite être redirigé vers la page panier////
+    product.selectedVarnish = select.options[select.selectedIndex].value;
+    ////[]qui représente lindex du premier element selectionnée option dans lelemetn html select //// ////Au clic du bouton panier je souhaite être redirigé vers la page panier////
     ////La propriété selectedIndex  renvoie l'index de l'option sélectionnée dans une liste déroulante.///
     window.location = "./panier.html";
     console.log(addToCartBtn);
@@ -107,7 +99,7 @@ function displayOneProduct(product) {
   }
 
   /* product.varnish.forEach(function (varnish) {
-    console.log(choixOption);
+    console.log(varnish);
     let option = document.createElement("option");
     let select = document.querySelector(".product-section_select");
 
@@ -128,7 +120,7 @@ function ajouterAuPanier(product) {
     name: product.name,
     price: product.price,
     quantity: 1, ////// qtité max de produit que lon met dans le local storage/////
-    selectedVarnish: product.selectedvarnish,
+    selectedVarnish: product.selectedVarnish,
   };
   console.log(saveToCartProduct);
 
@@ -143,19 +135,6 @@ function ajouterAuPanier(product) {
     ////Sinon la fonction récupère le tableau du localStorage, ajoute le nouveau produit, et enregistre le nouveau tableau//////
 
     cartProducts = JSON.parse(localStorage.getItem("cartProducts")); // je recup le tableau du LS get renvoie la valeure associée à la clé cardproducts/////
-
-    cartProducts.forEach((prod) => {
-      console.log(prod);
-      ///boucle sur chaque produit si yen a pas de nouveaux quil ya deja un produit au panier,  on peu augmenter sa quantité//////
-      //// ajout du nouveau produit//// //// prod =/////
-      if (
-        product._id === prod._id && /// on vérifie que les 2 consitions st ttes 2 vraies///////egalité stricte on vérifie la valeure et le type//////
-        product.selectedVarnish === prod.selectedVarnish
-      ) {
-        prod.quantity++; /// on peut augmenter sa quantité///
-        newDifferentProduct = false; //// il nya pas de nouveau produit////
-      }
-    });
 
     if (newDifferentProduct) cartProducts.push(saveToCartProduct); ///// si ya un nouveau produit on rajoute au tableau vide cartP les nouvelles données//////
 
