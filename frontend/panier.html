@@ -136,13 +136,13 @@
             </div>-->
           </div>
 
-          <div class="card card-outline-secondary my-4 <!--h-100-->">
-            <h2>
+          <div class="card card-outline-secondary my-4" id="leformulaire">
+            <!-- <h2>
               Pour pouvoir valider votre commande merci de remplir tous les
               champs
             </h2>
 
-            <form action="" method="post">
+            <form class="cart-form" action="post" type="submit">
               <div class="row form-group">
                 <div class="col-md-5">
                   <label for="prenom_contact">Prénom :</label>
@@ -151,6 +151,8 @@
                     name="prenom_contact"
                     id="prenom_contact"
                     class="form-control"
+                     maxlength="30" required>
+                    <span id="missPrenom"></span>
                   />
                 </div>
                 <div class="col-md-2"></div>
@@ -201,7 +203,7 @@
               >
                 Commander
               </button>
-            </form>
+            </form>-->
           </div>
           <!--</div>-->
           <!-- /.row -->

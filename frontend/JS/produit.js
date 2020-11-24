@@ -7,9 +7,7 @@ console.log(furnitureId);
 //////////////////////////Requête fetch avec l'identifiant id////////////////////////////////
 
 const getProducts = async function () {
-  /// fonction de récupération des données sur le serveu////
   let response = await fetch(
-    /// on attend la résolution de la promesse////
     `http://localhost:3000/api/furniture/${furnitureId}`
   );
   let product = await response.json();
@@ -23,7 +21,6 @@ getProducts();
 function displayOneProduct(product) {
   console.log(displayOneProduct);
 
-  ////division du prix par 100, plus bas : € rajouté////
   const divPrice = product.price / 100;
   const goodPrice = divPrice.toLocaleString("fr-FR", {
     style: "currency",
@@ -39,7 +36,7 @@ function displayOneProduct(product) {
               
                 <img class="card-img-top" src="${product.imageUrl}" alt="${product.name}" id="article-photo">
                 <div class="card-body">
-                 <a class="card-a" href="./produit.html?${product._id}"><h4 class="card-title">${product.name}</h4></a>
+                 <h4 class="card-title">${product.name}</h4>
                   <h5 id="prix-meuble">${goodPrice}</h5>
                  <p class="card-text" id="description-article" >${product.description}</p>
                 </div>
@@ -78,17 +75,17 @@ function displayOneProduct(product) {
     let addToCartBtn = document.querySelector("#ajouter-au-panier");
     console.log(addToCartBtn);
     product.selectedVarnish = select.options[select.selectedIndex].value;
-    ////[]qui représente lindex du premier element selectionnée option dans lelemetn html select //// ////Au clic du bouton panier je souhaite être redirigé vers la page panier////
+    ////[]qui représente lindex du premier element selectionnée option dans lelemetn html select ////
     ////La propriété selectedIndex  renvoie l'index de l'option sélectionnée dans une liste déroulante.///
     window.location = "./panier.html";
     console.log(addToCartBtn);
 
-    ajouterAuPanier(product); /// on appel la fonction ajout de produit au local storage /////
+    ajouterAuPanier(product);
   });
 
   //////////creation du déroullant avec les options avec  FOR OF////////
 
-  let option = document.createElement("option");
+  /* let option = document.createElement("option");
   let select = document.querySelector(".product-section_select");
 
   for (const option of product.varnish) {
@@ -96,9 +93,9 @@ function displayOneProduct(product) {
     //les différentes options////
 
     select.innerHTML += `<option>${option}</option>`;
-  }
+  }*/
 
-  /* product.varnish.forEach(function (varnish) {
+  product.varnish.forEach(function (varnish) {
     console.log(varnish);
     let option = document.createElement("option");
     let select = document.querySelector(".product-section_select");
@@ -106,25 +103,23 @@ function displayOneProduct(product) {
     option.value = varnish;
     option.textContent = varnish;
     select.appendChild(option);
-  });*/
+  });
 }
 ///////////////////////////////////////////création de la fonction ajout de produit au local storage/////////////////////////////////////////////////////////
 
 function ajouterAuPanier(product) {
-  let cartProducts = []; ///////tableau vide au départ qui contiendra  les données du produit ajouté////////
+  let cartProducts = [];
   let saveToCartProduct = {
-    //////données du produit ajouté.on initialise ici l'objet avec un ensemble de propriétés, liste de clé valeur, séparées par des ,///////////
-
     _id: product._id,
     imageUrl: product.imageUrl,
     name: product.name,
     price: product.price,
-    quantity: 1, ////// qtité max de produit que lon met dans le local storage/////
+    quantity: 1,
     selectedVarnish: product.selectedVarnish,
   };
   console.log(saveToCartProduct);
 
-  let newDifferentProduct = true; ///Boolean newdif  dans le cas ou jai un nouveau produit /////
+  let newDifferentProduct = true;
 
   if (localStorage.getItem("cartProducts") === null) {
     ///Si le localStorage est vide la fonction crée un nouveau tableau cartProducts et l'enregistre dans le localStorage ////
@@ -141,6 +136,5 @@ function ajouterAuPanier(product) {
     localStorage.setItem("cartProducts", JSON.stringify(cartProducts)); //////////// on stocke les nouvelles données////
   }
 
-  /// chekPanier();faudrait faire une focntion pour afficher le nbr de produit et verif quil yai un produit dans le panier///
   alert("Votre produit a bien été ajouté au panier");
 }

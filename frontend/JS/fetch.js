@@ -469,3 +469,155 @@ for (i=0;i<taille;i++)
         newDifferentProduct = false; //// il nya pas de nouveau produit////
       }
     });*/
+///Si le localStorage est vide la fonction crée un nouveau tableau cartProducts et l'enregistre dans le localStorage ////
+///Si le localStorage est vide la fonction crée un nouveau tableau cartProducts et l'enregistre dans le localStorage ////
+//localStorage.getItem("cartProducts") === null ? localStorage.setItem("cartProducts", JSON.stringify(cartProducts) = //
+
+/*///////////////////////////////////////////////////////validation Nom, Prenom ,Ville///////////////////////////////////////////////////
+function validateString(value) {
+  return / [a-zA-Z]+/.test(value);
+}
+
+///////////////////////////////////////////////////////validation mail/////////////////////////////////////////////////////////////////
+///function validateEmail(value) {
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2.3})+$/.test(value)) {
+    return true;
+  }
+  //return false;
+}//
+let formValid = document.querySelector("#envoyer_commande");
+let prenom = document.querySelector("#prenom_contact");
+let missPrenom = document.querySelector("#missPrenom");
+let prenomValide = [a - zA - Z];
+
+formValid.addEventListener("click", validation);
+
+function validation(event) {
+  if (prenom.valididy.valueMissing) {
+    event.prenventDefault();
+    missPrenom.textContent = "Prénom manquant";
+    missPrenom.style.color = "red";
+  } else if (prenomValide.toLocaleString(prenom.value) == false) {
+    event.preventDefault();
+    missPrenom.textContent = "Format incorrect";
+    missPrenom.style.color = "orange";
+  }
+}//
+
+// vérification des données nom prenom
+const prenom_contact = document.getElementById("prenom_contact");
+const nom_contact = document.getElementById("nom_contact");
+const email_contact = document.getElementById("email_contact");
+const adresse_contact = document.getElementById("adresse_contact");
+const ville_contact = document.getElementById("ville_contact");
+const envoyer_commande = document.getElementById("envoyer_commande");
+
+let verifier_donnees_textuel = (texte) => {
+  console.log(verifier_donnees_textuel);
+  let regex_texte = /^[A-Za-zéèàêëç-\s]{2,50}$/;
+  if (regex_texte.test(texte) == false) {
+    alert(
+      "Veuillez rentrer un nom ou prénom contenant au moins deux lettres et juste des lettres"
+    );
+    return false;
+  } else {
+    return texte;
+  }
+};
+
+let verifier_donnees_ville_adresse = (texte) => {
+  let regex_texte = /^[A-Za-z0-9éèêëç-\s]{2,100}$/;
+  if (regex_texte.test(texte) == false) {
+    alert(
+      "Veuillez rentrer une adresse ou une ville contenant au moins deux caractères"
+    );
+    return false;
+  } else {
+    return texte;
+  }
+};
+
+//Vérification email
+let verifier_donnees_email = (email) => {
+  console.log(verifier_donnees_email);
+  let regex_email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (regex_email.test(email) == false) {
+    alert("Veuillez rentrer un email correct (de la forme nom@nom.fr");
+    return false;
+  } else {
+    return email;
+  }
+};
+// envoie des données
+envoyer_commande.addEventListener(
+  "click",
+  (event) => {
+    console.log(envoyer_commande);
+    event.preventDefault();
+    if (
+      verifier_donnees_email(email_contact.value) &&
+      verifier_donnees_textuel(prenom_contact.value) &&
+      verifier_donnees_textuel(nom_contact.value) &&
+      verifier_donnees_ville_adresse(adresse_contact.value) &&
+      verifier_donnees_ville_adresse(ville_contact.value)
+    ) {
+      // Création d'un contact avec les données du formulaire
+      let contact = {
+        prenom_contact: document.getElementById("prenom_contact").value,
+        nom_contact: document.getElementById("nom_contact").value,
+        adresse_contact: document.getElementById("adresse_contact").value,
+        ville_contact: document.getElementById("ville_contact").value,
+        email_contact: document.getElementById("email_contact").value,
+      };
+      console.log(contact);
+
+      let products = []; ///dans le tableau product je recup les id des produits////
+      if (localStorage.getItem("cartProducts") !== null) {
+        let productObj = JSON.parse(localStorage.getItem("cartProducts"));
+        console.log(productObj);
+
+        productObj.forEach((p) => {
+          products.push(p._id);
+        });
+      }
+
+      let contactProducts = JSON.stringify({
+        /////formatage de lobjet contact et et du tableau products pour etre envoyé/////
+        contact,
+        products,
+      });
+    }
+    postOrder(contactProducts);
+  },
+  /* 
+    Requête POST
+    Envoi au serveur l'objet contact et le tableau d'id products au format string
+    Enregistrement de l'objet contact et l'orderId reçus du serveur, ainsi que le total de la commande sur le localStorage.
+    Changement de page -> confirmation.html
+    */
+/*
+  function postOrder(contactProducts) {
+    fetch("http://localhost:3000/api/furniture/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      mode: "cors",
+      body: contactProducts,
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((r) => {
+        localStorage.setItem("contact", JSON.stringify(r.contact));
+        localStorage.setItem("orderId", JSON.stringify(r.orderId));
+        localStorage.setItem("total", JSON.stringify(total));
+        
+        window.location.replace("./confirmation.html");
+      })
+      .catch((e) => {
+        displayError();
+        console.log(e);
+      });
+  }
+);*/

@@ -2,7 +2,7 @@
 let addBasket = document.querySelector("#monpanier");
 console.log(addBasket);
 
-let total = 0;
+/*let total = 0;*/
 
 displayCart();
 
@@ -10,9 +10,8 @@ function displayCart() {
   console.log(displayCart);
 
   if (localStorage.getItem("cartProducts") !== null) {
-    ///// si jai un prosuit dans le localS/////
-    let products = JSON.parse(localStorage.getItem("cartProducts")); //////je le récup dans ma variable products///////
-    total = 0; // on réinitialise  le total à 0 /////
+    let products = JSON.parse(localStorage.getItem("cartProducts"));
+    total = 0;
 
     addBasket.innerHTML += `
            
@@ -46,8 +45,6 @@ function displayCart() {
     console.log(resumePanier);
     console.log(products);
     products.forEach((product) => {
-      //////////////je créée une boucle for each: pour chaque produit ajouté jaurais l'ensemble des propriétés et possibilité de le supprimé daugmenter sa quantité/////////////
-
       const divPrice = product.price / 100;
 
       const goodPrice = divPrice.toLocaleString("fr-FR", {
@@ -79,13 +76,91 @@ function displayCart() {
                   <td class="supprimer">
                     <button
                       type="button"
-                      class="btn btn-outline-success btn-sm mb-2"
+                      class="btn btn-outline-success btn-sm mb-2 "
                       id="supprimePanier"
                     >
-                      x
+                      X
                     </button>
                   </td>
                    `;
+    });
+
+    let addToForm = document.querySelector("#leformulaire");
+    console.log(addToForm);
+    addToForm.innerHTML += `
+            <h2>
+              Pour pouvoir valider votre commande merci de remplir tous les
+              champs
+            </h2>
+
+            <form class="cart-form" action="post"  type="submit">
+              <div class="row form-group">
+                <div class="col-md-5">
+                  <label for="prenom_contact">Prénom :</label>
+                  <input
+                    type="text"
+                    name="prenom_contact"
+                    id="prenom_contact"
+                    class="form-control"
+                     maxlength="30"  pattern="[A-Za-z]{2,}" required />
+                     
+                  
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-5">
+                  <label for="nom_contact">Nom :</label>
+                  <input
+                    type="text"
+                    name="nom_contact"
+                    id="nom_contact"
+                    class="form-control"
+                    maxlenght="50" pattern"[A-Za-z]{2,}" required />
+                  
+                </div>
+              </div>
+              <div class="col-md-12 form-group">
+                <label for="email_contact">Adresse mail :</label>
+                <input
+                  type="email"
+                  name="email_contact"
+                  id="email_contact"
+                  class="form-control"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,4}" maxlength="30" required />
+              </div>
+              <div class="row form-group">
+                <div class="col-md-5">
+                  <label for="adresse_contact">Adresse :</label>
+                  <input
+                    type="text"
+                    name="adresse_contact"
+                    id="adresse_contact"
+                    class="form-control"
+                    maxlength="200" required />
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-5">
+                  <label for="ville_contact">Ville :</label>
+                  <input
+                    type="text"
+                    name="ville_contact"
+                    id="ville_contact"
+                    class="form-control"
+                    maxlength="30" required/>
+                </div>
+              </div>
+              <button
+                type="submit"
+                class="btn btn-danger"
+                id="envoyer_commande"
+              >
+                Commander
+              </button>
+            </form>`;
+
+    const form = document.querySelector(".cart-form");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      submitForm();
     });
   } else {
     const mistackingCart = document.querySelector("#erreur_panier");
@@ -100,6 +175,56 @@ function displayCart() {
   }
 }
 
-//////il faut pouvoir augmenter la quantité de 1 dun produit///
-////// et diminuer la quantité de 1 dun produit /////
-///////supprimer le produit selectionné//////
+/////récupération des valeures de linput dans lobjet contact////
+function submitForm() {
+  let contact = {
+    firstName: document.getElementById("prenom_contact").value,
+    lastName: document.getElementById("nom_contact").value,
+    address: document.getElementById("adresse_contact").value,
+    city: document.getElementById("ville_contact").value,
+    email: document.getElementById("email_contact").value,
+  };
+
+  let products = [];
+
+  if (localStorage.getItem("cartProducts") !== null) {
+    let productObj = JSON.parse(localStorage.getItem("cartProducts"));
+
+    productObj.forEach((p) => {
+      ////Récupération des id des produits du panier dans le tableau products////
+      products.push(p._id);
+    });
+  }
+
+  let contactProducts = JSON.stringify({
+    contact,
+    products,
+  });
+
+  postOrder(contactProducts);
+}
+
+function postOrder(contactProducts) {
+  fetch("http://localhost:3000/api/furniture/order", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    mode: "cors",
+    body: contactProducts,
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((r) => {
+      localStorage.setItem("contact", JSON.stringify(r.contact));
+      localStorage.setItem("orderId", JSON.stringify(r.orderId));
+      localStorage.setItem("total", JSON.stringify(total));
+
+      window.location.replace("./confirmation.html");
+    })
+    .catch((e) => {
+      displayError();
+      console.log(e);
+    });
+}
