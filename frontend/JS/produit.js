@@ -1,10 +1,10 @@
-///////////////////////////Récupération de l'ID  utilisation des paramètres de l'url(variable d'URL)/////////////////////////////////
+////////////////////////////////////////////////////////////RECUPERATION DE L ID ,  UTILISATION DES PARAMETRES DE L'URL /////////////////////////////////////////////////////////////////////////////////
 
-const params = new URLSearchParams(window.location.search); /////La propriété location, de l'objet Javascript window, permet de récupérer la chaine de requêtes, on l'analyse ///
-const furnitureId = params.get("id"); ///retourne la premiere valeure associée au parametre de recherche donnée////
+const params = new URLSearchParams(window.location.search);
+const furnitureId = params.get("id");
 console.log(furnitureId);
 
-//////////////////////////Requête fetch avec l'identifiant id////////////////////////////////
+///////////////////////////////////////////////////////////////////////REQUETE FETCH AVEC IDENTIFIANT ID//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const getProducts = async function () {
   let response = await fetch(
@@ -16,7 +16,7 @@ const getProducts = async function () {
 };
 getProducts();
 
-////////////////////////////////////////////AFFICHAGE DU PRODUIT , injection dans le DOM //////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////AFFICHAGE DU PRODUIT , INJECTION DANS LE DOM ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function displayOneProduct(product) {
   console.log(displayOneProduct);
@@ -31,9 +31,6 @@ function displayOneProduct(product) {
   console.log(article);
 
   article.innerHTML += `
-
-         
-              
                 <img class="card-img-top" src="${product.imageUrl}" alt="${product.name}" id="article-photo">
                 <div class="card-body">
                  <h4 class="card-title">${product.name}</h4>
@@ -45,13 +42,11 @@ function displayOneProduct(product) {
                     <div class="btn-group">
                       <form>
                         <label for="varnish-select">
-                          Type de vernis</label
-                        >
+                          Type de vernis</label>
                         <select class=" product-section_select"
                           name="product-section_select"
                           id="varnish-select" ></select>
                       </form>
-                     
                       <button
                         type="button"
                         class="btn btn-outline-success btn-sm mb-2"
@@ -62,10 +57,9 @@ function displayOneProduct(product) {
                   </div>
                 </div>
               </>
-        
-        `;
+           `;
 
-  /////////evnt click qui lance la fonction  de callback  d'ajout au panier avec le vernis selectionné hop hop hop  ////////
+  ////////////////////////////////////////////////////////EVENT CLICK QUI LANCE LA FONCTION DE CALLBACK DAJOUT AU PANIER AVEC LE VERNIS SELECTIONNE ////////////////////////////////////////////////////////////////////////////////////////////////
 
   let addToCartBtn = document.querySelector("#ajouter-au-panier");
   console.log(addToCartBtn);
@@ -75,40 +69,26 @@ function displayOneProduct(product) {
     let addToCartBtn = document.querySelector("#ajouter-au-panier");
     console.log(addToCartBtn);
     product.selectedVarnish = select.options[select.selectedIndex].value;
-    ////[]qui représente lindex du premier element selectionnée option dans lelemetn html select ////
-    ////La propriété selectedIndex  renvoie l'index de l'option sélectionnée dans une liste déroulante.///
     window.location = "./panier.html";
     console.log(addToCartBtn);
 
     ajouterAuPanier(product);
   });
 
-  //////////creation du déroullant avec les options avec  FOR OF////////
+  ////////////////////////////////////////////////////////////////////////CREATION DU DEROULLANT AVEC LA BOUCLE  FOR OF////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  /* let option = document.createElement("option");
+  let option = document.createElement("option");
   let select = document.querySelector(".product-section_select");
 
   for (const option of product.varnish) {
-    ///// la boucle me permet de parcourir les différentes propriété dc les diff vernis de mon objet product.varnish en créant un menu deroul avec
-    //les différentes options////
-
     select.innerHTML += `<option>${option}</option>`;
-  }*/
-
-  product.varnish.forEach(function (varnish) {
-    console.log(varnish);
-    let option = document.createElement("option");
-    let select = document.querySelector(".product-section_select");
-
-    option.value = varnish;
-    option.textContent = varnish;
-    select.appendChild(option);
-  });
+  }
 }
-///////////////////////////////////////////création de la fonction ajout de produit au local storage/////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////CREATION DE LA FONCTION AJOUT DES PRODUITS AU LOCAL STORAGE/////////////////////////////////////////////////////////////////////////////////////////////////
 
 function ajouterAuPanier(product) {
   let cartProducts = [];
+
   let saveToCartProduct = {
     _id: product._id,
     imageUrl: product.imageUrl,
@@ -122,19 +102,24 @@ function ajouterAuPanier(product) {
   let newDifferentProduct = true;
 
   if (localStorage.getItem("cartProducts") === null) {
-    ///Si le localStorage est vide la fonction crée un nouveau tableau cartProducts et l'enregistre dans le localStorage ////
-    console.log(cartProducts); /// getitem renvoie la valeur associée à la clé cartproducts////
-    cartProducts.push(saveToCartProduct); ///on ajoute au tableau Save avec les données du new produit  avec push/////
-    localStorage.setItem("cartProducts", JSON.stringify(cartProducts)); //nom de la clé cartproduct et sa valeur, le JSON Stringify convertit le tableau en chaine car SET est string//////
+    console.log(cartProducts);
+    cartProducts.push(saveToCartProduct);
+    localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
   } else {
-    ////Sinon la fonction récupère le tableau du localStorage, ajoute le nouveau produit, et enregistre le nouveau tableau//////
-
-    cartProducts = JSON.parse(localStorage.getItem("cartProducts")); // je recup le tableau du LS get renvoie la valeure associée à la clé cardproducts/////
-
-    if (newDifferentProduct) cartProducts.push(saveToCartProduct); ///// si ya un nouveau produit on rajoute au tableau vide cartP les nouvelles données//////
-
-    localStorage.setItem("cartProducts", JSON.stringify(cartProducts)); //////////// on stocke les nouvelles données////
+    cartProducts = JSON.parse(localStorage.getItem("cartProducts"));
+    if (newDifferentProduct) cartProducts.push(saveToCartProduct);
+    localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
   }
-
   alert("Votre produit a bien été ajouté au panier");
+
+  /* (newDifferentProduct)
+    ? cartProducts.push(saveToCartProduct)
+    : localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
+}*/
+
+  /*let storage = localStorage.getItem("cartProducts");
+
+  storage === null
+    ? localStorage.setItem("cartProducts", JSON.stringify(cartProducts))
+    : cartProducts.push(saveToCartProduct);*/
 }

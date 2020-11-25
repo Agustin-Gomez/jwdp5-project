@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/lazouz44/JWDP5/issues"
   },
-  "homepage": "https://github.com/lazouz44/JWDP5#readme"
+  "homepage": "https://github.com/lazouz44/JWDP5#readme",
+  "devDependencies": {
+    "eslint": "^7.14.0"
+  }
 }

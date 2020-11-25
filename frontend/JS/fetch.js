@@ -621,3 +621,12 @@ envoyer_commande.addEventListener(
       });
   }
 );*/
+/*product.varnish.forEach(function (varnish) {
+    console.log(varnish);
+    let option = document.createElement("option");
+    let select = document.querySelector(".product-section_select");
+
+    option.value = varnish;
+    option.textContent = varnish;
+    select.appendChild(option);
+  });*/

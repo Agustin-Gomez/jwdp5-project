@@ -1,4 +1,4 @@
-/* Récupération des différents éléments dans le localStorage afin de les afficher au chargement de la page */
+///////////////////////////////////////////////////////////// RECUPERATION DES DIFFERENTS ELEMENTS DANS LE LOCAL STORAGE POUR LES AFFICHER AU CHARGEMENT DE LA PAGE/////////////////////////////////////////////////////////////////
 
 const maConfirmation = document.querySelector("#lacommande");
 
@@ -8,8 +8,7 @@ const total = JSON.parse(localStorage.getItem("total"));
 
 maConfirmation.innerHTML += `
 
-
- <h2>
+            <h2>
               Merci pour votre commande n° <span id="confirmation_numero">${orderId}</span>
             </h2>
             <h2>
@@ -43,6 +42,4 @@ maConfirmation.innerHTML += `
             <p></p>
             <p>Paiement 100% sécurisé.</p>
             <p></p>
-
-
 `;
