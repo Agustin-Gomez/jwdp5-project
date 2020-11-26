@@ -37,15 +37,18 @@ function displayAllProduct(products) {
                       <img class="d-block img-fluid" src="${product.imageUrl}" alt="${product.name}">
                     </div>
                     `;
-    let active = 0;
+
     let listeImages = document.querySelectorAll(".carousel-item");
     console.log(listeImages);
 
-    for (i = 0; i < listeImages.lenght; i++) {
+    i = 0;
+    listeImages.item(i).classList.add("active");
+
+    /* for (i = 0; i < listeImages.lenght; i++) {
       if (i == active) {
         listeImages.item(i).classList.add("active");
       }
-    }
+    }*/
 
     productList.innerHTML += `
 

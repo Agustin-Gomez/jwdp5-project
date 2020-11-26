@@ -2,6 +2,7 @@
 
 let addBasket = document.querySelector("#monpanier");
 console.log(addBasket);
+let total = 0;
 
 ////////////////////////////////////////////////////////////////////////////AFFICHAGE DU CONTENU DU PANIER DANS FONCTION DISPLAYCART AVEC BOUCLE FOR EACH///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -28,13 +29,7 @@ function displayCart() {
                   <th scope="col" class="supprimer">Supprimer</th>
                 </tr>
               </thead>
-              <tfoot class="thetotal">
-                <tr class="totalPrice">
-                  <td class="bigprice">Prix total:${(total / 100).toFixed(
-                    2
-                  )} </td>
-                </tr>
-              </tfoot>
+              
               <tbody id="resume_panier_test">
                 
               </tbody>
@@ -53,6 +48,8 @@ function displayCart() {
         style: "currency",
         currency: "EUR",
       });
+
+      total = goodPrice;
 
       const divQuantity = product.quantity / 100;
       console.log(resumePanier);
@@ -74,7 +71,7 @@ function displayCart() {
                     <button class="cart_remove">-</button>${product.quantity}
                     <button class="cart_add">+</button>
                   </td>
-                  <td class="prix">${goodPrice * divQuantity}</td>
+                  <td class="prix">${goodPrice}</td>
                   <td class="supprimer">
                     <button
                       type="button"
@@ -86,6 +83,13 @@ function displayCart() {
                   </td>
                    `;
     });
+
+    addBasket.innerHTML += `
+    <tfoot class="thetotal">
+                <tr class="totalPrice">
+                  <td class="bigprice">Prix total:${total} </td>
+                </tr>
+              </tfoot>`;
 
     //////////////////////////////////////////////////AFFICHAGE DU CONTENU DU FORMULAIRE TOUJOURS DANS FONCTION DISPLAYCART,ECOUTE DE LENVOIE DU FORMULAIRE AVEC ADDEVENTLISTENER///////////////////////////////////////////////////////////////
 
@@ -176,6 +180,8 @@ function displayCart() {
     });
   } else {
     addBasket.innerHTML += `
+    
+      
             <div class="col-md-12 text-center" id="erreur_panier">
             <p class="cart_vide">
                 Votre panier est vide ! 

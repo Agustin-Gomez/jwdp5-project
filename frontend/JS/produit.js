@@ -122,4 +122,8 @@ function ajouterAuPanier(product) {
   storage === null
     ? localStorage.setItem("cartProducts", JSON.stringify(cartProducts))
     : cartProducts.push(saveToCartProduct);*/
+
+  /*localStorage.getItem("cartProducts") === null
+    ? localStorage.setItem("cartProducts", JSON.stringify(cartProducts))
+    : (cartProducts = JSON.parse(localStorage.getItem("cartProducts")));*/
 }
