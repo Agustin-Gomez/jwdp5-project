@@ -1,22 +1,20 @@
-////////////////////////////////////////////////////////////////////////AFFICHAGE DU CONTENU DU PANIER ET AFFICHAGE DE FORMULAIRE DANS STRUCTURE CONDITIONELLE////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////SUR CETTE PAGE : AFFICHAGE DU CONTENU DU PANIER ET AFFICHAGE DE FORMULAIRE DANS STRUCTURE CONDITIONELLE////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 let addBasket = document.querySelector("#monpanier");
 console.log(addBasket);
 let total = 0;
 
-////////////////////////////////////////////////////////////////////////////AFFICHAGE DU CONTENU DU PANIER DANS FONCTION DISPLAYCART AVEC BOUCLE FOR EACH///////////////////////////////////////////////////////////////////////////////////////////////////
-
-displayCart();
+///////////////////////////////////////////////////////////////////////////AFFICHAGE DU CONTENU DU PANIER DANS FONCTION DISPLAYCART AVEC BOUCLE FOR EACH///////////////////////////////////////////////////////////////////////////////////////////////////
 
 function displayCart() {
   console.log(displayCart);
 
   if (localStorage.getItem("cartProducts") !== null) {
     let products = JSON.parse(localStorage.getItem("cartProducts"));
-    total = 0;
 
     addBasket.innerHTML += `
-           
+        <div class="table-responsive">   
       <h2>Détail de votre panier</h2>
             <table class="table table-bordered" id="resume_panier">
               <thead>
@@ -34,25 +32,21 @@ function displayCart() {
                 
               </tbody>
             </table>
+            </div>
       `;
 
     let resumePanier = document.querySelector("#resume_panier_test");
     console.log(resumePanier);
-
     console.log(products);
 
     products.forEach((product) => {
       const divPrice = product.price / 100;
-
       const goodPrice = divPrice.toLocaleString("fr-FR", {
         style: "currency",
         currency: "EUR",
       });
 
-      total = goodPrice;
-
-      const divQuantity = product.quantity / 100;
-      console.log(resumePanier);
+      total = total + divPrice;
 
       resumePanier.innerHTML += `
          <tr>
@@ -87,7 +81,7 @@ function displayCart() {
     addBasket.innerHTML += `
     <tfoot class="thetotal">
                 <tr class="totalPrice">
-                  <td class="bigprice">Prix total:${total} </td>
+                  <td class="bigprice">Prix total:${total.toFixed(2)} € </td>
                 </tr>
               </tfoot>`;
 
@@ -111,10 +105,11 @@ function displayCart() {
                     id="prenom_contact"
                     class="form-control"
                     placeholder="Votre prénom"
-                    maxlength="30"  
-                    pattern="[A-Za-z]{2,}" 
-                    required />
-                </div>
+                    pattern"/^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/"
+                    maxlength="30" 
+                    required /> 
+                    <span id="missPrenom"></span>
+               </div>
                 <div class="col-md-2"></div>
                 <div class="col-md-5">
                   <label for="nom_contact">Nom :</label>
@@ -127,6 +122,7 @@ function displayCart() {
                     maxlenght="50"
                     pattern"[A-Za-z]{2,}"
                     required />
+                    <span id="missNom"></span>
                 </div>
               </div>
               <div class="col-md-12 form-group">
@@ -140,6 +136,8 @@ function displayCart() {
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,4}" 
                     maxlength="30" 
                     required />
+                    <span id="missEmail"></span>
+
               </div>
               <div class="row form-group">
                 <div class="col-md-5">
@@ -152,6 +150,7 @@ function displayCart() {
                     placeholder="Votre adresse"
                     maxlength="200"
                      required />
+                     <span id="missAdresse"></span>
                 </div>
                 <div class="col-md-2"></div>
                 <div class="col-md-5">
@@ -164,25 +163,86 @@ function displayCart() {
                     placeholder="Votre ville"
                     maxlength="30"
                      required/>
+                      <span id="missVille"></span>
                 </div>
               </div>
               <button
                 type="submit"
+                value="valider"
                 class="btn btn-danger"
                 id="envoyer_commande">Commander</button>
             </form>`;
+
+    //////////////////////////////////////////////////////////////////VERIFICATION DES DONNEES DU FORMULAIRE AVEC FONCTION VALIDATION ET ADDEVENTLISTENER NOM PRENOM VILLE///////////////////////////////////////////////////
+
+    let formValid = document.querySelector("#envoyer_commande");
+    let prenom = document.querySelector("#prenom_contact");
+    let missPrenom = document.querySelector("#missPrenom");
+    let nom = document.querySelector("#nom_contact");
+    let missNom = document.querySelector("#missNom");
+    let ville = document.querySelector("#ville_contact");
+    let missVille = document.querySelector("#missVille");
+    let adresse = document.querySelector("#adresse_contact");
+    let missAdresse = document.querySelector("#missAdresse");
+    let email = document.querySelector("#email_contact");
+    let missEmail = document.querySelector("#missEmail");
+    let emailValid = /[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,4}/;
+    let adresseValid = /^[A-Za-z0-9éèêëç-\s]{2,100}$/;
+    let villeValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
+    let nomValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
+    let prenomValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
+    /*let missInput = ["missPrenom", "missNom", "missAdresse", "missVille", "missEmail"];*/
+    /*let input = ["prenom_contact", "nom_contact", "adresse_contact", "ville_contact", "email_contact"];*/
+    /*let texte = [prenomValid, nomValid, adresseValid, villeValid, emailValid];*/
+
+    function validationField(input, missInput, texte) {
+      if (input.validity.valueMissing) {
+        input.textContent = "Veuillez remplir ce champ";
+      } else if (texte.test(input.value) == false) {
+        missInput.textContent = "Format incorrect";
+      }
+    }
+
+    function validation(e) {
+      let validOk = true;
+
+      if (validOk) {
+        validationField(nom, missNom, nomValid) == true &&
+          validationField(ville, missVille, villeValid) == true &&
+          validationField(adresse, missAdresse, adresseValid) == true &&
+          validationField(email, missEmail, emailValid) == true &&
+          validationField(prenom, missPrenom, prenomValid) == true;
+      } else {
+        return false;
+      }
+
+      return validOk;
+    }
+
+    /*validationField(prenom, missPrenom, prenomValid) == true &&
+            validationField(nom, missNom, nomValid) == true &&
+            validationField(ville, missVille, villeValid) == true &&
+            validationField(adresse, missAdresse, adresseValid) == true &&
+            validationField(email, missEmail, emailValid) == true;
+          validationField(input, missInput, texte) == true;*/
+    /*validationField(input, texte) != true;*/
+    /* validationField(input.validity, texte.validity) == true;*/
+    /* validationField(input, texte) == true;*/
 
     const form = document.querySelector(".cart-form");
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      submitForm();
+      let isValid = validation(e);
+      if (isValid == true) {
+        submitForm();
+      }
     });
   } else {
     addBasket.innerHTML += `
     
       
-            <div class="col-md-12 text-center" id="erreur_panier">
+            <div class="col-md-12 text-center " id="erreur_panier">
             <p class="cart_vide">
                 Votre panier est vide ! 
                 <br/>
@@ -192,7 +252,7 @@ function displayCart() {
         `;
   }
 }
-
+displayCart();
 ///////////////////////////////////////////////////////////////////////FONCTION SUBMITFORM = RECUPERATION DES VALEURES DE LINPUT DANS LOBJET CONTACT///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////RECUPERATION DES ID DES PRODUITS DU PANIER DANS LE TABLEAU PRODUCTS///////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////FORMATAGE DE LOJET ET DU TABLEAU EN CHAINE DE CARATERES AVANT LENVOIE DANS FONCTION POSTORDER////////////////////////////////////////////////////////////
@@ -244,7 +304,7 @@ function postOrder(contactProducts) {
       localStorage.setItem("contact", JSON.stringify(r.contact));
       localStorage.setItem("orderId", JSON.stringify(r.orderId));
       localStorage.setItem("total", JSON.stringify(total));
-
+      localStorage.removeItem("cartProducts");
       window.location.replace("./confirmation.html");
     })
     .catch((e) => {

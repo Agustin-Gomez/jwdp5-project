@@ -7,12 +7,17 @@ console.log(furnitureId);
 ///////////////////////////////////////////////////////////////////////REQUETE FETCH AVEC IDENTIFIANT ID//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const getProducts = async function () {
-  let response = await fetch(
-    `http://localhost:3000/api/furniture/${furnitureId}`
-  );
-  let product = await response.json();
-  console.log(product);
-  displayOneProduct(product);
+  try {
+    let response = await fetch(
+      `http://localhost:3000/api/furniture/${furnitureId}`
+    );
+    let product = response.ok
+      ? await response.json()
+      : console.error("Retour du serveur : ", response.status);
+    displayOneProduct(product);
+  } catch (e) {
+    consoles.log(e);
+  }
 };
 getProducts();
 
@@ -59,7 +64,7 @@ function displayOneProduct(product) {
               </>
            `;
 
-  ////////////////////////////////////////////////////////EVENT CLICK QUI LANCE LA FONCTION DE CALLBACK DAJOUT AU PANIER AVEC LE VERNIS SELECTIONNE ////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////EVENT CLICK QUI LANCE LA FONCTION DE CALLBACK D'AJOUT AU PANIER AVEC LE VERNIS SELECTIONNE ////////////////////////////////////////////////////////////////////////////////////////////////
 
   let addToCartBtn = document.querySelector("#ajouter-au-panier");
   console.log(addToCartBtn);
@@ -84,11 +89,9 @@ function displayOneProduct(product) {
     select.innerHTML += `<option>${option}</option>`;
   }
 }
-/////////////////////////////////////////////////////////////////////CREATION DE LA FONCTION AJOUT DES PRODUITS AU LOCAL STORAGE/////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////CREATION DE LA FONCTION TERNAIRE AJOUT DES PRODUITS AU LOCAL STORAGE/////////////////////////////////////////////////////////////////////////////////////////////////
 
 function ajouterAuPanier(product) {
-  let cartProducts = [];
-
   let saveToCartProduct = {
     _id: product._id,
     imageUrl: product.imageUrl,
@@ -99,31 +102,11 @@ function ajouterAuPanier(product) {
   };
   console.log(saveToCartProduct);
 
-  let newDifferentProduct = true;
+  let cartProducts =
+    localStorage.getItem("cartProducts") === null
+      ? []
+      : JSON.parse(localStorage.getItem("cartProducts"));
 
-  if (localStorage.getItem("cartProducts") === null) {
-    console.log(cartProducts);
-    cartProducts.push(saveToCartProduct);
-    localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
-  } else {
-    cartProducts = JSON.parse(localStorage.getItem("cartProducts"));
-    if (newDifferentProduct) cartProducts.push(saveToCartProduct);
-    localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
-  }
-  alert("Votre produit a bien été ajouté au panier");
-
-  /* (newDifferentProduct)
-    ? cartProducts.push(saveToCartProduct)
-    : localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
-}*/
-
-  /*let storage = localStorage.getItem("cartProducts");
-
-  storage === null
-    ? localStorage.setItem("cartProducts", JSON.stringify(cartProducts))
-    : cartProducts.push(saveToCartProduct);*/
-
-  /*localStorage.getItem("cartProducts") === null
-    ? localStorage.setItem("cartProducts", JSON.stringify(cartProducts))
-    : (cartProducts = JSON.parse(localStorage.getItem("cartProducts")));*/
+  cartProducts.push(saveToCartProduct);
+  localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
 }

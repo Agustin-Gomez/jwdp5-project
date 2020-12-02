@@ -1,15 +1,11 @@
-////////////////////////////////////////////////////////////////////RECUPERATION DES PRODUITS DEPUIS DE SERVEUR///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////RECUPERATION DES PRODUITS DEPUIS DE SERVEUR ,UTILISATION TRY CATCH METHODE FETCH///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const getProducts = async () => {
   try {
     let response = await fetch("http://localhost:3000/api/furniture");
-
-    if (response.ok) {
-      let products = await response.json();
-      console.log(products);
-      displayAllProduct(products);
-    } else {
-      console.error("Retour du serveur : ", response.status);
-    }
+    let products = response.ok
+      ? await response.json()
+      : console.error("Retour du serveur : ", response.status);
+    displayAllProduct(products);
   } catch (e) {
     console.log(e);
   }
@@ -17,16 +13,16 @@ const getProducts = async () => {
 
 getProducts();
 
-//////////////////////////////////////////////////////////////AFFICHAGE DES PRODUITS SOUS FORME DE LISTE, injection dans le DOM ////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////AFFICHAGE DES PRODUITS SOUS FORME DE LISTE, INJECTION DANS LE DOM AVEC INNERHTML ////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////MISE EN PLACE DU CAROUSEL////////////////////////////////////////////////////////////////////////////////////////////////
+
 function displayAllProduct(products) {
   const productList = document.getElementById("productList");
   console.log(productList);
-
   const carousel = document.querySelector(".carousel-inner");
 
   products.forEach((product) => {
     const divPrice = product.price / 100;
-
     const goodPrice = divPrice.toLocaleString("fr-FR", {
       style: "currency",
       currency: "EUR",
@@ -41,14 +37,7 @@ function displayAllProduct(products) {
     let listeImages = document.querySelectorAll(".carousel-item");
     console.log(listeImages);
 
-    i = 0;
-    listeImages.item(i).classList.add("active");
-
-    /* for (i = 0; i < listeImages.lenght; i++) {
-      if (i == active) {
-        listeImages.item(i).classList.add("active");
-      }
-    }*/
+    listeImages.item(0).classList.add("active");
 
     productList.innerHTML += `
 

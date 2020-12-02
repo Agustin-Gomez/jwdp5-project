@@ -1,3 +1,9 @@
+/* for (i = 0; i < listeImages.lenght; i++) {
+      if (i == active) {
+        listeImages.item(i).classList.add("active");
+      }
+    }*/
+
 ////creation choix du vernis////
 ///// creation d'une variable pour choisir l'option////
 /*let option_personnalisation = document.getElementById(
@@ -630,3 +636,234 @@ envoyer_commande.addEventListener(
     option.textContent = varnish;
     select.appendChild(option);
   });*/
+/*let formValid = document.querySelector("#envoyer_commande");
+let prenom = document.querySelector("#prenom_contact");
+let missPrenom = document.querySelector("#missPrenom");
+let prenomValide = /^[A-Za-z0-9éèêëç-\s]{2,100}$/;
+
+formValid.addEventListener("click", validation);
+
+function validation(e) {
+  if (prenom.valididy.valueMissing) {
+    e.prenventDefault();
+    missPrenom.textContent = "Prénom manquant";
+    missPrenom.style.color = "red";
+  } else if (prenomValide.toLocaleString(prenom.value) == false) {
+    e.preventDefault();
+    missPrenom.textContent = "Format incorrect";
+    missPrenom.style.color = "orange";
+  }
+} //
+
+function error(input, message) {
+  input.className = "error";
+  // show the error message
+  const error = input.previousElementSibling;
+  error.innerText = message;
+  return false;
+}
+pattern"[A-Za-z]{2,}"
+
+
+
+
+
+
+///////////VERIF AVEC FONCTION///
+ let formValid = document.querySelector("#envoyer_commande");
+    let prenom = document.querySelector("#prenom_contact");
+    let missPrenom = document.querySelector("#missPrenom");
+    let prenomValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
+    let nom = document.querySelector("#nom_contact");
+    let missNom = document.querySelector("#missNom");
+    let nomValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
+    let ville = document.querySelector("#ville_contact");
+    let missVille = document.querySelector("#missVille");
+    let villeValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
+
+    formValid.addEventListener("click", validation);
+
+    console.log(prenomValid);
+
+function validation(e) {
+      if (
+        prenom.validity.valueMissing ||
+        nom.validity.valueMissing ||
+        ville.validity.valueMissing
+      ) {
+        e.preventDefault();
+        missPrenom.textContent = "Veuillez écrire votre prénom";
+        missVille.textContent = "Veuillez écrire votre ville";
+        missNom.textContent = "Veuillez écrire votre nom";
+        missPrenom.style.color = "red";
+        missNom.style.color = "red";
+        missVille.style.color = "red";
+      } else if (
+        ((prenomValid.test(prenom.value) == false &&
+          nomValid.test(nom.value)) == false && villeValid.test(ville.value)) ==
+        false
+      ) {
+        e.preventDefault();
+        missNom.textContent = "Format incorrect";
+        missPrenom.textContent = "Format incorrect";
+        missVille.textContent = "Format incorrect";
+        missPrenom.style.color = "orange";
+        missNom.style.color = "orange";
+        missVille.style.color = "orange";
+      }
+    }*/
+
+
+
+
+
+
+
+
+
+
+
+
+}
+/*function validation(e) {
+  if (adresse.validity.valueMissing) {
+    e.preventDefault();
+    missAdresse.textContent = " Veuillez écrire votre adresse";
+    missAdresse.style.color = "red";
+  } else if (adresseValid.test(adresse.value) == false) {
+    e.preventDefault();
+    missAdresse.textContent = "Format incorrect";
+    missAdresse.style.color = "orange";
+  }
+}
+
+
+}
+if (
+        prenom.validity.valueMissing ||
+        nom.validity.valueMissing ||
+        ville.validity.valueMissing
+      ) {
+        e.preventDefault();
+        missPrenom.textContent = "Veuillez écrire votre prénom";
+        missVille.textContent = "Veuillez écrire votre ville";
+        missNom.textContent = "Veuillez écrire votre nom";
+        missPrenom.style.color = "red";
+        missNom.style.color = "red";
+        missVille.style.color = "red";
+      } else if (
+        prenomValid.test(prenom.value) == false ||
+        nomValid.test(nom.value) == false ||
+        villeValid.test(ville.value) == false
+      ) {
+        e.preventDefault();
+        missNom.textContent = "Format incorrect";
+        missPrenom.textContent = "Format incorrect";
+        missVille.textContent = "Format incorrect";
+        missPrenom.style.color = "orange";
+        missNom.style.color = "orange";
+        missVille.style.color = "orange";
+      }*/
+/*
+      let missInput = [missPrenom, missNom, missAdresse, missVille, missEmail];///  je veux indiquer à quoi correspond input texte et missImput///
+    let inputIds = [prenom, nom, adresse, ville, email];
+    let texte = [prenomValid, nomValid, adresseValid, villeValid, emailValid];
+
+    function validationField(input, missInput, texte) {
+      if (input.validity.valueMissing) {
+        input.textContent = "Veuillez remplir ce champ";
+      } else if (texte.test(input.value) == false) {
+        missInput.textContent = "Format incorrect";
+      }
+    }
+
+    function validation(e) {
+      let validOk = true;
+      for (let i = 0; i < inputIds.length; i = i + 1) {
+        let input = inputIds[i];
+        if (
+          inputIds[i] === prenom ||
+          inputIds[i] === nom ||
+          inputIds[i] === adresse ||
+          inputIds[i] === ville ||
+          inputIds[i] === email
+        ) {
+          if (validationField(input.value) === true) {
+            e = true;
+          }
+        }
+        if (inputsIds[i] === email) {
+          if (alidationField(input.value) === true) {
+            e = true;
+          }
+        }
+        if (inputsIds[i] === adresse) {
+          if (alidationField(input.value) === true) {
+            e = true;
+          }
+        }
+        if (inputsIds[i] === nom) {
+          if (alidationField(input.value) === true) {
+            e = true;
+          }
+        }
+        if (inputsIds[i] === ville) {
+          if (alidationField(input.value) === true) {
+            e = true;
+          }
+        } else {
+          return false;
+        }
+
+        return validOk;
+      }
+    }*/
+
+    //test ternaire orinoco
+   // let products = 
+   // respose.ok? await response.json() : console.error("Retour du serveur : ", response.status);//// oke marche//
+/*if (response.ok) {
+      let products = await response.json();
+      console.log(products);
+      displayAllProduct(products);
+    } else {
+      console.error("Retour du serveur : ", response.status);
+    }*/
+
+    /*const getProducts = async () => {
+  try {
+    let response = await fetch("http://localhost:3000/api/furniture");
+    let products = response.ok
+      ? await response.json()
+      : console.error("Retour du serveur : ", response.status);
+    displayAllProduct(products);
+  } catch (e) {
+    console.log(e);
+  }
+};*/
+
+/*getProducts();*/
+
+const getProducts = async function () {
+  try{
+    let response = await fetch(`http://localhost:3000/api/furniture/${furnitureId}`);
+    let product = response.ok ? await response.json():console.error("Retour du serveur : ", response.status)
+    displayOneProduct(product);
+  }catch (e) {
+    consoles.log(e);
+  }
+};
+getProducts();
+
+const getProducts = async function () {
+  let response = await fetch(
+    `http://localhost:3000/api/furniture/${furnitureId}`
+  );
+  let product = await response.json();
+  console.log(product);
+  displayOneProduct(product);
+};
+getProducts();
+
+
+  

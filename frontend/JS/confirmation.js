@@ -12,9 +12,9 @@ maConfirmation.innerHTML += `
               Merci pour votre commande n° <span id="confirmation_numero">${orderId}</span>
             </h2>
             <h2>
-              Prix total de votre commande <span id="confirmation_prix">${(
-                total / 100
-              ).toFixed(2)}€</span>
+              Prix total de votre commande <span id="confirmation_prix">${total.toFixed(
+                2
+              )}€</span>
             </h2>
              <ul>
                  <li class="coordonnées">Vos coordonnées : </li>
@@ -43,3 +43,7 @@ maConfirmation.innerHTML += `
             <p>Paiement 100% sécurisé.</p>
             <p></p>
 `;
+
+localStorage.removeItem("contact");
+localStorage.removeItem("total");
+localStorage.removeItem("orderId");
