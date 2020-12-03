@@ -192,7 +192,13 @@ function displayCart() {
     let nomValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
     let prenomValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
     /*let missInput = ["missPrenom", "missNom", "missAdresse", "missVille", "missEmail"];*/
-    /*let input = ["prenom_contact", "nom_contact", "adresse_contact", "ville_contact", "email_contact"];*/
+    let input = [
+      "prenom_contact",
+      "nom_contact",
+      "adresse_contact",
+      "ville_contact",
+      "email_contact",
+    ];
     /*let texte = [prenomValid, nomValid, adresseValid, villeValid, emailValid];*/
 
     function validationField(input, missInput, texte) {
@@ -201,20 +207,40 @@ function displayCart() {
       } else if (texte.test(input.value) == false) {
         missInput.textContent = "Format incorrect";
       }
+      return true;
     }
 
     function validation(e) {
+      /*let validOk = true;*/
+
       let validOk = true;
 
-      if (validOk) {
-        validationField(nom, missNom, nomValid) == true &&
-          validationField(ville, missVille, villeValid) == true &&
-          validationField(adresse, missAdresse, adresseValid) == true &&
-          validationField(email, missEmail, emailValid) == true &&
-          validationField(prenom, missPrenom, prenomValid) == true;
+      if (
+        prenom.validity.value === true ||
+        prenomValid.test(input.value) === true
+      ) {
+        validOk;
+      } else {
+        validationField === true;
+        e.preventDefault();
+      }
+      /* validationField(
+          input == nom,
+          missInput == missNom,
+          texte == nomValid
+        ) === true
+          ? true
+          : false;*/
+
+      /* if (validOk) {
+        validationField(nom, nomValid) == true &&
+          validationField(ville, villeValid) == true &&
+          validationField(adresse, adresseValid) == true &&
+          validationField(email, emailValid) == true &&
+          validationField(prenom, prenomValid) == true;
       } else {
         return false;
-      }
+      }*/
 
       return validOk;
     }
@@ -242,7 +268,7 @@ function displayCart() {
     addBasket.innerHTML += `
     
       
-            <div class="col-md-12 text-center " id="erreur_panier">
+            <div class="card mt-4" id="erreur_panier">
             <p class="cart_vide">
                 Votre panier est vide ! 
                 <br/>
@@ -265,6 +291,14 @@ function submitForm() {
     city: document.getElementById("ville_contact").value,
     email: document.getElementById("email_contact").value,
   };
+
+  /*let productObj = JSON.parse(localStorage.getItem("cartProducts"));
+  let products =
+    localStorage.getItem("cartProducts") !== null
+      ? productObj.forEach((p) => {
+          products.push(p._id);
+        })
+      : [];*/
 
   let products = [];
 

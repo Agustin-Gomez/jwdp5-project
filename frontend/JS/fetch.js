@@ -844,7 +844,7 @@ if (
 
 /*getProducts();*/
 
-const getProducts = async function () {
+/*const getProducts = async function () {
   try{
     let response = await fetch(`http://localhost:3000/api/furniture/${furnitureId}`);
     let product = response.ok ? await response.json():console.error("Retour du serveur : ", response.status)
@@ -863,7 +863,10 @@ const getProducts = async function () {
   console.log(product);
   displayOneProduct(product);
 };
-getProducts();
+getProducts();*/
 
+let products = (localStorage.getItem("cartProducts") !== null) ? productObj.forEach((p) => {
+      products.push(p._id);
+    }) : []
 
   
