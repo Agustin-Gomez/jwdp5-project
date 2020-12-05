@@ -2,13 +2,13 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 let addBasket = document.querySelector("#monpanier");
-console.log(addBasket);
+/*console.log(addBasket);*/
 let total = 0;
 
 ///////////////////////////////////////////////////////////////////////////AFFICHAGE DU CONTENU DU PANIER DANS FONCTION DISPLAYCART AVEC BOUCLE FOR EACH///////////////////////////////////////////////////////////////////////////////////////////////////
 
 function displayCart() {
-  console.log(displayCart);
+  /*console.log(displayCart);*/
 
   if (localStorage.getItem("cartProducts") !== null) {
     let products = JSON.parse(localStorage.getItem("cartProducts"));
@@ -36,8 +36,8 @@ function displayCart() {
       `;
 
     let resumePanier = document.querySelector("#resume_panier_test");
-    console.log(resumePanier);
-    console.log(products);
+    /*console.log(resumePanier);
+    console.log(products);*/
 
     products.forEach((product) => {
       const divPrice = product.price / 100;
@@ -45,7 +45,7 @@ function displayCart() {
         style: "currency",
         currency: "EUR",
       });
-
+      const divQuantity = product.quantity / 100;
       total = total + divPrice;
 
       resumePanier.innerHTML += `
@@ -88,7 +88,7 @@ function displayCart() {
     //////////////////////////////////////////////////AFFICHAGE DU CONTENU DU FORMULAIRE TOUJOURS DANS FONCTION DISPLAYCART,ECOUTE DE LENVOIE DU FORMULAIRE AVEC ADDEVENTLISTENER///////////////////////////////////////////////////////////////
 
     let addToForm = document.querySelector("#leformulaire");
-    console.log(addToForm);
+    /*console.log(addToForm);*/
 
     addToForm.innerHTML += `
             <h2>
@@ -175,7 +175,6 @@ function displayCart() {
 
     //////////////////////////////////////////////////////////////////VERIFICATION DES DONNEES DU FORMULAIRE AVEC FONCTION VALIDATION ET ADDEVENTLISTENER NOM PRENOM VILLE///////////////////////////////////////////////////
 
-    let formValid = document.querySelector("#envoyer_commande");
     let prenom = document.querySelector("#prenom_contact");
     let missPrenom = document.querySelector("#missPrenom");
     let nom = document.querySelector("#nom_contact");
@@ -191,69 +190,38 @@ function displayCart() {
     let villeValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
     let nomValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
     let prenomValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
-    /*let missInput = ["missPrenom", "missNom", "missAdresse", "missVille", "missEmail"];*/
-    let input = [
-      "prenom_contact",
-      "nom_contact",
-      "adresse_contact",
-      "ville_contact",
-      "email_contact",
-    ];
-    /*let texte = [prenomValid, nomValid, adresseValid, villeValid, emailValid];*/
 
     function validationField(input, missInput, texte) {
+      let forOk = true;
+
       if (input.validity.valueMissing) {
-        input.textContent = "Veuillez remplir ce champ";
+        missInput.textContent = "Veuillez remplir ce champ";
+        forOk = false;
+        console.log(forOk);
       } else if (texte.test(input.value) == false) {
         missInput.textContent = "Format incorrect";
+        forOk = false;
+        console.log(forOk);
       }
-      return true;
+      console.log(forOk);
+      return forOk;
     }
 
     function validation(e) {
-      /*let validOk = true;*/
-
       let validOk = true;
 
       if (
-        prenom.validity.value === true ||
-        prenomValid.test(input.value) === true
+        validationField(prenom, missPrenom, prenomValid) === false ||
+        validationField(nom, missNom, nomValid) === false ||
+        validationField(ville, missVille, villeValid) === false ||
+        validationField(adresse, missAdresse, adresseValid) === false ||
+        validationField(email, missEmail, emailValid) === false
       ) {
-        validOk;
-      } else {
-        validationField === true;
-        e.preventDefault();
+        validOk = false;
       }
-      /* validationField(
-          input == nom,
-          missInput == missNom,
-          texte == nomValid
-        ) === true
-          ? true
-          : false;*/
-
-      /* if (validOk) {
-        validationField(nom, nomValid) == true &&
-          validationField(ville, villeValid) == true &&
-          validationField(adresse, adresseValid) == true &&
-          validationField(email, emailValid) == true &&
-          validationField(prenom, prenomValid) == true;
-      } else {
-        return false;
-      }*/
 
       return validOk;
     }
-
-    /*validationField(prenom, missPrenom, prenomValid) == true &&
-            validationField(nom, missNom, nomValid) == true &&
-            validationField(ville, missVille, villeValid) == true &&
-            validationField(adresse, missAdresse, adresseValid) == true &&
-            validationField(email, missEmail, emailValid) == true;
-          validationField(input, missInput, texte) == true;*/
-    /*validationField(input, texte) != true;*/
-    /* validationField(input.validity, texte.validity) == true;*/
-    /* validationField(input, texte) == true;*/
 
     const form = document.querySelector(".cart-form");
 
@@ -266,15 +234,13 @@ function displayCart() {
     });
   } else {
     addBasket.innerHTML += `
-    
-      
-            <div class="card mt-4" id="erreur_panier">
-            <p class="cart_vide">
-                Votre panier est vide ! 
-                <br/>
-                <a href="./index.html">Revenir à la page d'accueil</a>
-            </p>
-            </div>
+     <div class="card mt-8" id="erreur_panier">
+       <p class="cart_vide">
+       Votre panier est vide ! <br />
+       <a href="./index.html">Revenir à la page d'accueil</a>
+      </p>
+     </div>
+            
         `;
   }
 }

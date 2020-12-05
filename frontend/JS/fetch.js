@@ -713,18 +713,6 @@ function validation(e) {
       }
     }*/
 
-
-
-
-
-
-
-
-
-
-
-
-}
 /*function validation(e) {
   if (adresse.validity.valueMissing) {
     e.preventDefault();
@@ -764,64 +752,64 @@ if (
         missNom.style.color = "orange";
         missVille.style.color = "orange";
       }*/
-/*
-      let missInput = [missPrenom, missNom, missAdresse, missVille, missEmail];///  je veux indiquer à quoi correspond input texte et missImput///
-    let inputIds = [prenom, nom, adresse, ville, email];
-    let texte = [prenomValid, nomValid, adresseValid, villeValid, emailValid];
 
-    function validationField(input, missInput, texte) {
-      if (input.validity.valueMissing) {
-        input.textContent = "Veuillez remplir ce champ";
-      } else if (texte.test(input.value) == false) {
-        missInput.textContent = "Format incorrect";
+let missInput = [missPrenom, missNom, missAdresse, missVille, missEmail]; ///  je veux indiquer à quoi correspond input texte et missImput///
+let inputIds = [prenom, nom, adresse, ville, email];
+let texte = [prenomValid, nomValid, adresseValid, villeValid, emailValid];
+
+function validationField(input, missInput, texte) {
+  if (input.validity.valueMissing) {
+    input.textContent = "Veuillez remplir ce champ";
+  } else if (texte.test(input.value) == false) {
+    missInput.textContent = "Format incorrect";
+  }
+}
+
+function validation(e) {
+  let validOk = true;
+  for (let i = 0; i < inputIds.length; i = i + 1) {
+    let input = inputIds[i];
+    if (
+      inputIds[i] === prenom ||
+      inputIds[i] === nom ||
+      inputIds[i] === adresse ||
+      inputIds[i] === ville ||
+      inputIds[i] === email
+    ) {
+      if (validationField(input.value) === true) {
+        e = true;
       }
     }
-
-    function validation(e) {
-      let validOk = true;
-      for (let i = 0; i < inputIds.length; i = i + 1) {
-        let input = inputIds[i];
-        if (
-          inputIds[i] === prenom ||
-          inputIds[i] === nom ||
-          inputIds[i] === adresse ||
-          inputIds[i] === ville ||
-          inputIds[i] === email
-        ) {
-          if (validationField(input.value) === true) {
-            e = true;
-          }
-        }
-        if (inputsIds[i] === email) {
-          if (alidationField(input.value) === true) {
-            e = true;
-          }
-        }
-        if (inputsIds[i] === adresse) {
-          if (alidationField(input.value) === true) {
-            e = true;
-          }
-        }
-        if (inputsIds[i] === nom) {
-          if (alidationField(input.value) === true) {
-            e = true;
-          }
-        }
-        if (inputsIds[i] === ville) {
-          if (alidationField(input.value) === true) {
-            e = true;
-          }
-        } else {
-          return false;
-        }
-
-        return validOk;
+    if (inputsIds[i] === email) {
+      if (alidationField(input.value) === true) {
+        e = true;
       }
-    }*/
+    }
+    if (inputsIds[i] === adresse) {
+      if (alidationField(input.value) === true) {
+        e = true;
+      }
+    }
+    if (inputsIds[i] === nom) {
+      if (alidationField(input.value) === true) {
+        e = true;
+      }
+    }
+    if (inputsIds[i] === ville) {
+      if (alidationField(input.value) === true) {
+        e = true;
+      }
+    } else {
+      return false;
+    }
 
-    //test ternaire orinoco
-   // let products = 
-   // respose.ok? await response.json() : console.error("Retour du serveur : ", response.status);//// oke marche//
+    return validOk;
+  }
+}
+
+//test ternaire orinoco
+// let products =
+// respose.ok? await response.json() : console.error("Retour du serveur : ", response.status);//// oke marche//
 /*if (response.ok) {
       let products = await response.json();
       console.log(products);
@@ -830,7 +818,7 @@ if (
       console.error("Retour du serveur : ", response.status);
     }*/
 
-    /*const getProducts = async () => {
+/*const getProducts = async () => {
   try {
     let response = await fetch("http://localhost:3000/api/furniture");
     let products = response.ok
@@ -865,8 +853,26 @@ const getProducts = async function () {
 };
 getProducts();*/
 
-let products = (localStorage.getItem("cartProducts") !== null) ? productObj.forEach((p) => {
+/*let products = (localStorage.getItem("cartProducts") !== null) ? productObj.forEach((p) => {
       products.push(p._id);
-    }) : []
+    }) : []*/
+Prenom.addEventListener("input", function (e) {
+  let validOk = true;
+  let value = e.target.value;
+  if (value.prenomValid) {
+    validOk;
+  } else {
+    validOk = false;
+  }
+  return validOk;
+});
 
-  
+addBasket.innerHTML += `
+     <div class="card mt-8" id="erreur_panier">
+       <p class="cart_vide">
+       Votre panier est vide ! <br />
+       <a href="./index.html">Revenir à la page d'accueil</a>
+      </p>
+     </div>
+            
+        `;

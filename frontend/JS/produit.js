@@ -2,7 +2,7 @@
 
 const params = new URLSearchParams(window.location.search);
 const furnitureId = params.get("id");
-console.log(furnitureId);
+/*console.log(furnitureId);*/
 
 ///////////////////////////////////////////////////////////////////////REQUETE FETCH AVEC IDENTIFIANT ID//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -11,12 +11,15 @@ const getProducts = async function () {
     let response = await fetch(
       `http://localhost:3000/api/furniture/${furnitureId}`
     );
-    let product = response.ok
-      ? await response.json()
-      : console.error("Retour du serveur : ", response.status);
-    displayOneProduct(product);
+
+    if (response.ok) {
+      let product = await response.json();
+      displayOneProduct(product);
+    } else {
+      window.location = "./index.html";
+    }
   } catch (e) {
-    consoles.log(e);
+    console.log(e);
   }
 };
 getProducts();
@@ -24,7 +27,7 @@ getProducts();
 ///////////////////////////////////////////////////////////////////AFFICHAGE DU PRODUIT , INJECTION DANS LE DOM ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function displayOneProduct(product) {
-  console.log(displayOneProduct);
+  /*console.log(displayOneProduct);*/
 
   const divPrice = product.price / 100;
   const goodPrice = divPrice.toLocaleString("fr-FR", {
@@ -67,29 +70,29 @@ function displayOneProduct(product) {
   ////////////////////////////////////////////////////////EVENT CLICK QUI LANCE LA FONCTION DE CALLBACK D'AJOUT AU PANIER AVEC LE VERNIS SELECTIONNE ////////////////////////////////////////////////////////////////////////////////////////////////
 
   let addToCartBtn = document.querySelector("#ajouter-au-panier");
-  console.log(addToCartBtn);
+  /*console.log(addToCartBtn);*/
 
   addToCartBtn.addEventListener("click", () => {
     let select = document.querySelector(".product-section_select");
-    let addToCartBtn = document.querySelector("#ajouter-au-panier");
-    console.log(addToCartBtn);
+    /*let addToCartBtn = document.querySelector("#ajouter-au-panier");*/
+    /* console.log(addToCartBtn);*/
     product.selectedVarnish = select.options[select.selectedIndex].value;
     window.location = "./panier.html";
-    console.log(addToCartBtn);
+    /*console.log(addToCartBtn);*/
 
     ajouterAuPanier(product);
   });
 
   ////////////////////////////////////////////////////////////////////////CREATION DU DEROULLANT AVEC LA BOUCLE  FOR OF////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  let option = document.createElement("option");
+  /*let option = document.createElement("option");*/
   let select = document.querySelector(".product-section_select");
 
   for (const option of product.varnish) {
     select.innerHTML += `<option>${option}</option>`;
   }
 }
-/////////////////////////////////////////////////////////////////////CREATION DE LA FONCTION TERNAIRE AJOUT DES PRODUITS AU LOCAL STORAGE/////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////CREATION DE LA FONCTION TERNAIRE AJOUT DE PRODUIT AU LOCAL STORAGE/////////////////////////////////////////////////////////////////////////////////////////////////
 
 function ajouterAuPanier(product) {
   let saveToCartProduct = {
@@ -100,7 +103,7 @@ function ajouterAuPanier(product) {
     quantity: 1,
     selectedVarnish: product.selectedVarnish,
   };
-  console.log(saveToCartProduct);
+  /*console.log(saveToCartProduct);*/
 
   let cartProducts =
     localStorage.getItem("cartProducts") === null
@@ -109,4 +112,5 @@ function ajouterAuPanier(product) {
 
   cartProducts.push(saveToCartProduct);
   localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
+  /* console.log(cartProducts);*/
 }
