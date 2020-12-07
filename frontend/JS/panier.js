@@ -2,21 +2,19 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 let addBasket = document.querySelector("#monpanier");
-/*console.log(addBasket);*/
+
 let total = 0;
 
 ///////////////////////////////////////////////////////////////////////////AFFICHAGE DU CONTENU DU PANIER DANS FONCTION DISPLAYCART AVEC BOUCLE FOR EACH///////////////////////////////////////////////////////////////////////////////////////////////////
 
 function displayCart() {
-  /*console.log(displayCart);*/
-
   if (localStorage.getItem("cartProducts") !== null) {
     let products = JSON.parse(localStorage.getItem("cartProducts"));
 
     addBasket.innerHTML += `
         <div class="table-responsive">   
-      <h2>Détail de votre panier</h2>
-            <table class="table table-bordered" id="resume_panier">
+          <h2>Détail de votre panier</h2>
+            <table class="table table-bordered table-responsive " id="resume_panier">
               <thead>
                 <tr>
                   <th scope="col" class="produit">Article</th>
@@ -36,8 +34,6 @@ function displayCart() {
       `;
 
     let resumePanier = document.querySelector("#resume_panier_test");
-    /*console.log(resumePanier);
-    console.log(products);*/
 
     products.forEach((product) => {
       const divPrice = product.price / 100;
@@ -88,7 +84,6 @@ function displayCart() {
     //////////////////////////////////////////////////AFFICHAGE DU CONTENU DU FORMULAIRE TOUJOURS DANS FONCTION DISPLAYCART,ECOUTE DE LENVOIE DU FORMULAIRE AVEC ADDEVENTLISTENER///////////////////////////////////////////////////////////////
 
     let addToForm = document.querySelector("#leformulaire");
-    /*console.log(addToForm);*/
 
     addToForm.innerHTML += `
             <h2>
@@ -186,7 +181,7 @@ function displayCart() {
     let email = document.querySelector("#email_contact");
     let missEmail = document.querySelector("#missEmail");
     let emailValid = /[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,4}/;
-    let adresseValid = /^[A-Za-z0-9éèêëç-\s]{2,100}$/;
+    let adresseValid = /^[0-9][\s][a-zA-Z][a-z]/;
     let villeValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
     let nomValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
     let prenomValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
@@ -197,13 +192,11 @@ function displayCart() {
       if (input.validity.valueMissing) {
         missInput.textContent = "Veuillez remplir ce champ";
         forOk = false;
-        console.log(forOk);
       } else if (texte.test(input.value) == false) {
         missInput.textContent = "Format incorrect";
         forOk = false;
-        console.log(forOk);
       }
-      console.log(forOk);
+
       return forOk;
     }
 
@@ -233,9 +226,10 @@ function displayCart() {
       }
     });
   } else {
-    addBasket.innerHTML += `
-     <div class="card mt-8" id="erreur_panier">
-       <p class="cart_vide">
+    let addContent = document.querySelector("#madiv");
+    addContent.innerHTML += `
+     <div class="col-lg-12 text-center">
+       <p class="mt-5">
        Votre panier est vide ! <br />
        <a href="./index.html">Revenir à la page d'accueil</a>
       </p>

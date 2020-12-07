@@ -6,7 +6,6 @@ const getProducts = async () => {
       ? await response.json()
       : console.error("Retour du serveur : ", response.status);
     displayAllProduct(products);
-    /*console.log(products);*/
   } catch (e) {
     console.log(e);
   }
@@ -19,7 +18,7 @@ getProducts();
 
 function displayAllProduct(products) {
   const productList = document.getElementById("productList");
-  /* console.log(productList);*/
+
   const carousel = document.querySelector(".carousel-inner");
 
   products.forEach((product) => {
@@ -36,7 +35,6 @@ function displayAllProduct(products) {
                     `;
 
     let listeImages = document.querySelectorAll(".carousel-item");
-    /*console.log(listeImages);*/
 
     listeImages.item(0).classList.add("active");
 

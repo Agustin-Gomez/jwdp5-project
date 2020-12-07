@@ -2,7 +2,6 @@
 
 const params = new URLSearchParams(window.location.search);
 const furnitureId = params.get("id");
-/*console.log(furnitureId);*/
 
 ///////////////////////////////////////////////////////////////////////REQUETE FETCH AVEC IDENTIFIANT ID//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -27,8 +26,6 @@ getProducts();
 ///////////////////////////////////////////////////////////////////AFFICHAGE DU PRODUIT , INJECTION DANS LE DOM ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function displayOneProduct(product) {
-  /*console.log(displayOneProduct);*/
-
   const divPrice = product.price / 100;
   const goodPrice = divPrice.toLocaleString("fr-FR", {
     style: "currency",
@@ -70,22 +67,18 @@ function displayOneProduct(product) {
   ////////////////////////////////////////////////////////EVENT CLICK QUI LANCE LA FONCTION DE CALLBACK D'AJOUT AU PANIER AVEC LE VERNIS SELECTIONNE ////////////////////////////////////////////////////////////////////////////////////////////////
 
   let addToCartBtn = document.querySelector("#ajouter-au-panier");
-  /*console.log(addToCartBtn);*/
 
   addToCartBtn.addEventListener("click", () => {
     let select = document.querySelector(".product-section_select");
-    /*let addToCartBtn = document.querySelector("#ajouter-au-panier");*/
-    /* console.log(addToCartBtn);*/
+
     product.selectedVarnish = select.options[select.selectedIndex].value;
     window.location = "./panier.html";
-    /*console.log(addToCartBtn);*/
 
     ajouterAuPanier(product);
   });
 
   ////////////////////////////////////////////////////////////////////////CREATION DU DEROULLANT AVEC LA BOUCLE  FOR OF////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  /*let option = document.createElement("option");*/
   let select = document.querySelector(".product-section_select");
 
   for (const option of product.varnish) {
@@ -103,7 +96,6 @@ function ajouterAuPanier(product) {
     quantity: 1,
     selectedVarnish: product.selectedVarnish,
   };
-  /*console.log(saveToCartProduct);*/
 
   let cartProducts =
     localStorage.getItem("cartProducts") === null
@@ -112,5 +104,4 @@ function ajouterAuPanier(product) {
 
   cartProducts.push(saveToCartProduct);
   localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
-  /* console.log(cartProducts);*/
 }
