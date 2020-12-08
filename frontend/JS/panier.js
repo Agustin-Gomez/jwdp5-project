@@ -41,7 +41,7 @@ function displayCart() {
         style: "currency",
         currency: "EUR",
       });
-      const divQuantity = product.quantity / 100;
+
       total = total + divPrice;
 
       resumePanier.innerHTML += `
@@ -66,7 +66,7 @@ function displayCart() {
                     <button
                       type="button"
                       class="btn btn-outline-success btn-sm mb-2 "
-                      id="supprimePanier"
+                      id="supprimePanier "
                     >
                       X
                     </button>
@@ -128,7 +128,7 @@ function displayCart() {
                     id="email_contact"
                     class="form-control"
                     placeholder="exemple@gmail.com"
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,4}" 
+                    
                     maxlength="30" 
                     required />
                     <span id="missEmail"></span>
@@ -180,14 +180,14 @@ function displayCart() {
     let missAdresse = document.querySelector("#missAdresse");
     let email = document.querySelector("#email_contact");
     let missEmail = document.querySelector("#missEmail");
-    let emailValid = /[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,4}/;
+    let emailValid = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     let adresseValid = /^[0-9][\s][a-zA-Z][a-z]/;
     let villeValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
     let nomValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
     let prenomValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
 
     function validationField(input, missInput, texte) {
-      let forOk = true;
+      /* let forOk = true;
 
       if (input.validity.valueMissing) {
         missInput.textContent = "Veuillez remplir ce champ";
@@ -197,6 +197,15 @@ function displayCart() {
         forOk = false;
       }
 
+      return forOk;
+    }*/
+
+      let forOk =
+        input.validity.valueMissing + (texte.test(input.value) == false)
+          ? false
+          : true;
+      missInput.textContent = "Veuillez remplir ce champ";
+      missInput.textContent = "Format incorrect";
       return forOk;
     }
 
@@ -252,14 +261,6 @@ function submitForm() {
     email: document.getElementById("email_contact").value,
   };
 
-  /*let productObj = JSON.parse(localStorage.getItem("cartProducts"));
-  let products =
-    localStorage.getItem("cartProducts") !== null
-      ? productObj.forEach((p) => {
-          products.push(p._id);
-        })
-      : [];*/
-
   let products = [];
 
   if (localStorage.getItem("cartProducts") !== null) {
@@ -302,7 +303,7 @@ function postOrder(contactProducts) {
       window.location.replace("./confirmation.html");
     })
     .catch((e) => {
-      displayError();
       console.log(e);
+      displayError();
     });
 }

@@ -7,7 +7,7 @@ const getProducts = async () => {
       : console.error("Retour du serveur : ", response.status);
     displayAllProduct(products);
   } catch (e) {
-    console.log(e);
+    displayError();
   }
 };
 

@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////////////////// RECUPERATION DES DIFFERENTS ELEMENTS DANS LE LOCAL STORAGE POUR LES AFFICHER AU CHARGEMENT DE LA PAGE/////////////////////////////////////////////////////////////////
 
 const maConfirmation = document.querySelector("#lacommande");
-
 const contact = JSON.parse(localStorage.getItem("contact"));
 const orderId = JSON.parse(localStorage.getItem("orderId"));
 const total = JSON.parse(localStorage.getItem("total"));

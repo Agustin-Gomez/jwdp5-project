@@ -18,7 +18,7 @@ const getProducts = async function () {
       window.location = "./index.html";
     }
   } catch (e) {
-    console.log(e);
+    displayError();
   }
 };
 getProducts();
@@ -104,4 +104,6 @@ function ajouterAuPanier(product) {
 
   cartProducts.push(saveToCartProduct);
   localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
+
+  alert("Votre produit a bien été ajouté au panier");
 }
