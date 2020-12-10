@@ -128,7 +128,6 @@ function displayCart() {
                     id="email_contact"
                     class="form-control"
                     placeholder="exemple@gmail.com"
-                    
                     maxlength="30" 
                     required />
                     <span id="missEmail"></span>
@@ -168,7 +167,7 @@ function displayCart() {
                 id="envoyer_commande">Commander</button>
             </form>`;
 
-    //////////////////////////////////////////////////////////////////VERIFICATION DES DONNEES DU FORMULAIRE AVEC FONCTION VALIDATION ET ADDEVENTLISTENER NOM PRENOM VILLE///////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////VERIFICATION DES DONNEES DU FORMULAIRE AVEC FONCTION VALIDATION ET ADDEVENTLISTENER ///////////////////////////////////////////////////
 
     let prenom = document.querySelector("#prenom_contact");
     let missPrenom = document.querySelector("#missPrenom");
@@ -187,19 +186,6 @@ function displayCart() {
     let prenomValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
 
     function validationField(input, missInput, texte) {
-      /* let forOk = true;
-
-      if (input.validity.valueMissing) {
-        missInput.textContent = "Veuillez remplir ce champ";
-        forOk = false;
-      } else if (texte.test(input.value) == false) {
-        missInput.textContent = "Format incorrect";
-        forOk = false;
-      }
-
-      return forOk;
-    }*/
-
       let forOk =
         input.validity.valueMissing + (texte.test(input.value) == false)
           ? false
@@ -237,20 +223,23 @@ function displayCart() {
   } else {
     let addContent = document.querySelector("#madiv");
     addContent.innerHTML += `
-     <div class="col-lg-12 text-center">
+     <div class="col-lg-8 mx-auto">
        <p class="mt-5">
        Votre panier est vide ! <br />
        <a href="./index.html">Revenir à la page d'accueil</a>
       </p>
-     </div>
-            
-        `;
+     </div> `;
+
+    const footer = document.querySelector("#myfooter");
+
+    footer.classList.add("fixed-bottom");
   }
 }
 displayCart();
-///////////////////////////////////////////////////////////////////////FONCTION SUBMITFORM = RECUPERATION DES VALEURES DE LINPUT DANS LOBJET CONTACT///////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////RECUPERATION DES ID DES PRODUITS DU PANIER DANS LE TABLEAU PRODUCTS///////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////FORMATAGE DE LOJET ET DU TABLEAU EN CHAINE DE CARATERES AVANT LENVOIE DANS FONCTION POSTORDER////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////FONCTION SUBMITFORM = RECUPERATION DES VALEURES DE LINPUT DANS LOBJET CONTACT///////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////RECUPERATION DES ID DES PRODUITS DU PANIER DANS LE TABLEAU PRODUCTS///////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////FORMATAGE DE LOJET ET DU TABLEAU EN CHAINE DE CARATERES AVANT LENVOIE DANS FONCTION POSTORDER////////////////////////////////////////////////////////////
 
 function submitForm() {
   let contact = {
@@ -279,9 +268,9 @@ function submitForm() {
   postOrder(contactProducts);
 }
 
-//////////////////////////////////////////////////////////////////////////////FONCTION POSTORDER = REQUETE POST//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////// ENVOI AU SERVEUR L'OBJET CONTACT ET LE TABLEAU PRODUCTS AVEC LE BON FORMAT/////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////// ENREGISTREMENT DE LOBJET CONTACT ET DE L'ORDERID RECUS DU SERVEUR, ET DU TOTAL DE LA COMMANDE SUR LE LOCAL STORAGE////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////FONCTION POSTORDER = REQUETE POST//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////ENVOI AU SERVEUR L'OBJET CONTACT ET LE TABLEAU PRODUCTS AVEC LE BON FORMAT/////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////ENREGISTREMENT DE LOBJET CONTACT ET DE L'ORDERID RECUS DU SERVEUR, ET DU TOTAL DE LA COMMANDE SUR LE LOCAL STORAGE////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function postOrder(contactProducts) {
   fetch("http://localhost:3000/api/furniture/order", {
@@ -303,7 +292,6 @@ function postOrder(contactProducts) {
       window.location.replace("./confirmation.html");
     })
     .catch((e) => {
-      console.log(e);
-      displayError();
+      displayErrorForm();
     });
 }
