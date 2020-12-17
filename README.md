@@ -5,5 +5,5 @@ Se compose d'un dossier backend déjà crée et d'un dossier frontend qu'il a fa
 Un thème a été utilisé pour creer l'interface. 
 
 #Lancer l'application
-Dans le terminal aller dans le fichier backend puis node server 
+Clonez le repo avec git clone . Dans le terminal aller dans le fichier backend puis node server 
 
