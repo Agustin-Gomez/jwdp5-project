@@ -7,12 +7,12 @@ const furnitureId = params.get("id");
 
 const getProducts = async function () {
   try {
-    let response = await fetch(
+    const response = await fetch(
       `http://localhost:3000/api/furniture/${furnitureId}`
     );
 
     if (response.ok) {
-      let product = await response.json();
+      const product = await response.json();
       displayOneProduct(product);
     } else {
       window.location = "./index.html";
@@ -66,10 +66,10 @@ function displayOneProduct(product) {
 
   /////////////////////////////////////////////////////////////EVENT CLICK QUI LANCE LA FONCTION DE CALLBACK D'AJOUT AU PANIER AVEC LE VERNIS SELECTIONNE ////////////////////////////////////////////////////////////////////////////////////////////////
 
-  let addToCartBtn = document.querySelector("#ajouter-au-panier");
+  const addToCartBtn = document.querySelector("#ajouter-au-panier");
 
   addToCartBtn.addEventListener("click", () => {
-    let select = document.querySelector(".product-section_select");
+    const select = document.querySelector(".product-section_select");
 
     product.selectedVarnish = select.options[select.selectedIndex].value;
     window.location = "./panier.html";
@@ -79,7 +79,7 @@ function displayOneProduct(product) {
 
   ///////////////////////////////////////////////////////////////////////////CREATION DU DEROULLANT AVEC LA BOUCLE  FOR OF////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  let select = document.querySelector(".product-section_select");
+  const select = document.querySelector(".product-section_select");
 
   for (const option of product.varnish) {
     select.innerHTML += `<option>${option}</option>`;
@@ -88,7 +88,7 @@ function displayOneProduct(product) {
 /////////////////////////////////////////////////////////////////////CREATION DE LA FONCTION TERNAIRE AJOUT DE PRODUIT AU LOCAL STORAGE/////////////////////////////////////////////////////////////////////////////////////////////////
 
 function ajouterAuPanier(product) {
-  let saveToCartProduct = {
+  const saveToCartProduct = {
     _id: product._id,
     imageUrl: product.imageUrl,
     name: product.name,
@@ -97,7 +97,7 @@ function ajouterAuPanier(product) {
     selectedVarnish: product.selectedVarnish,
   };
 
-  let cartProducts =
+  const cartProducts =
     localStorage.getItem("cartProducts") === null
       ? []
       : JSON.parse(localStorage.getItem("cartProducts"));

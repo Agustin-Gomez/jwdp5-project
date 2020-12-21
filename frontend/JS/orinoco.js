@@ -2,8 +2,8 @@
 
 const getProducts = async () => {
   try {
-    let response = await fetch("http://localhost:3000/api/furniture");
-    let products = response.ok
+    const response = await fetch("http://localhost:3000/api/furniture");
+    const products = response.ok
       ? await response.json()
       : console.error("Retour du serveur : ", response.status);
     displayAllProduct(products);
@@ -35,7 +35,7 @@ function displayAllProduct(products) {
                     </div>
                     `;
 
-    let listeImages = document.querySelectorAll(".carousel-item");
+    const listeImages = document.querySelectorAll(".carousel-item");
 
     listeImages.item(0).classList.add("active");
 

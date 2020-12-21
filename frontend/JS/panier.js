@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////SUR CETTE PAGE : AFFICHAGE DU CONTENU DU PANIER ET AFFICHAGE DE FORMULAIRE DANS STRUCTURE CONDITIONELLE////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-let addBasket = document.querySelector("#monpanier");
+const addBasket = document.querySelector("#monpanier");
 
 let total = 0;
 
@@ -9,7 +9,7 @@ let total = 0;
 
 function displayCart() {
   if (localStorage.getItem("cartProducts") !== null) {
-    let products = JSON.parse(localStorage.getItem("cartProducts"));
+    const products = JSON.parse(localStorage.getItem("cartProducts"));
 
     addBasket.innerHTML += `
         <div class="table-responsive">   
@@ -33,7 +33,7 @@ function displayCart() {
             </div>
       `;
 
-    let resumePanier = document.querySelector("#resume_panier_test");
+    const resumePanier = document.querySelector("#resume_panier_test");
 
     products.forEach((product) => {
       const divPrice = product.price / 100;
@@ -83,7 +83,7 @@ function displayCart() {
 
     //////////////////////////////////////////////////////////AFFICHAGE DU CONTENU DU FORMULAIRE TOUJOURS DANS FONCTION DISPLAYCART,ECOUTE DE LENVOIE DU FORMULAIRE AVEC ADDEVENTLISTENER///////////////////////////////////////////////////////////////
 
-    let addToForm = document.querySelector("#leformulaire");
+    const addToForm = document.querySelector("#leformulaire");
 
     addToForm.innerHTML += `
             <h2>
@@ -167,61 +167,17 @@ function displayCart() {
                 id="envoyer_commande">Commander</button>
             </form>`;
 
-    ////////////////////////////////////////////////////////VERIFICATION DES DONNEES DU FORMULAIRE AVEC FONCTION VALIDATION ET ADDEVENTLISTENER ///////////////////////////////////////////////////
-
-    let prenom = document.querySelector("#prenom_contact");
-    let missPrenom = document.querySelector("#missPrenom");
-    let nom = document.querySelector("#nom_contact");
-    let missNom = document.querySelector("#missNom");
-    let ville = document.querySelector("#ville_contact");
-    let missVille = document.querySelector("#missVille");
-    let adresse = document.querySelector("#adresse_contact");
-    let missAdresse = document.querySelector("#missAdresse");
-    let email = document.querySelector("#email_contact");
-    let missEmail = document.querySelector("#missEmail");
-    let emailValid = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    let adresseValid = /^[0-9][\s][a-zA-Z][a-z]/;
-    let villeValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
-    let nomValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
-    let prenomValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a]+)?$/;
-
-    function validationField(input, missInput, texte) {
-      let forOk =
-        input.validity.valueMissing + (texte.test(input.value) == false)
-          ? false
-          : true;
-      missInput.textContent = "Veuillez remplir ce champ";
-      missInput.textContent = "Format incorrect";
-      return forOk;
-    }
-
-    function validation(e) {
-      let validOk = true;
-
-      if (
-        validationField(prenom, missPrenom, prenomValid) === false ||
-        validationField(nom, missNom, nomValid) === false ||
-        validationField(ville, missVille, villeValid) === false ||
-        validationField(adresse, missAdresse, adresseValid) === false ||
-        validationField(email, missEmail, emailValid) === false
-      ) {
-        validOk = false;
-      }
-
-      return validOk;
-    }
-
     const form = document.querySelector(".cart-form");
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      let isValid = validation(e);
+      const isValid = validation(e);
       if (isValid == true) {
         submitForm();
       }
     });
   } else {
-    let addContent = document.querySelector("#madiv");
+    const addContent = document.querySelector("#madiv");
     addContent.innerHTML += `
      <div class="col-lg-8 mx-auto">
        <p class="mt-5">
@@ -237,12 +193,65 @@ function displayCart() {
 }
 displayCart();
 
+////////////////////////////////////////////////////////VERIFICATION DES DONNEES DU FORMULAIRE AVEC FONCTION VALIDATION ET ADDEVENTLISTENER //////////////////////////////////////////////////////////////////////
+
+function validationField(input, missInput, texte) {
+  const forOk =
+    input.validity.valueMissing == true || texte.test(input.value) == false
+      ? false
+      : true;
+
+  if (forOk == false) {
+    missInput.textContent = "Format incorrect";
+  } else {
+    missInput.textContent = "";
+  }
+  return forOk;
+}
+
+function validation(e) {
+  const prenom = document.querySelector("#prenom_contact");
+  const missPrenom = document.querySelector("#missPrenom");
+  const nom = document.querySelector("#nom_contact");
+  const missNom = document.querySelector("#missNom");
+  const ville = document.querySelector("#ville_contact");
+  const missVille = document.querySelector("#missVille");
+  const adresse = document.querySelector("#adresse_contact");
+  const missAdresse = document.querySelector("#missAdresse");
+  const email = document.querySelector("#email_contact");
+  const missEmail = document.querySelector("#missEmail");
+  const emailValid = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  const adresseValid = /^[0-9][\s][a-zA-Z][a-z]/;
+  const nomValid = /^[a-zA-Z][a-z]/;
+  const prenomValid = /^[a-zA-Z][a-z]/;
+  const villeValid = /^[a-zA-Z][a-z]/;
+
+  let validOk = true;
+  const validPrenom = validationField(prenom, missPrenom, prenomValid);
+  const validNom = validationField(nom, missNom, nomValid);
+  const validAdresse = validationField(adresse, missAdresse, adresseValid);
+  const validVille = validationField(ville, missVille, villeValid);
+  const validMail = validationField(email, missEmail, emailValid);
+
+  if (
+    validPrenom === false ||
+    validNom === false ||
+    validVille === false ||
+    validAdresse === false ||
+    validMail === false
+  ) {
+    validOk = false;
+  }
+
+  return validOk;
+}
+
 ///////////////////////////////////////////////////////////////FONCTION SUBMITFORM = RECUPERATION DES VALEURES DE LINPUT DANS LOBJET CONTACT///////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////RECUPERATION DES ID DES PRODUITS DU PANIER DANS LE TABLEAU PRODUCTS///////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////FORMATAGE DE LOJET ET DU TABLEAU EN CHAINE DE CARATERES AVANT LENVOIE DANS FONCTION POSTORDER////////////////////////////////////////////////////////////
 
 function submitForm() {
-  let contact = {
+  const contact = {
     firstName: document.getElementById("prenom_contact").value,
     lastName: document.getElementById("nom_contact").value,
     address: document.getElementById("adresse_contact").value,
@@ -250,17 +259,17 @@ function submitForm() {
     email: document.getElementById("email_contact").value,
   };
 
-  let products = [];
+  const products = [];
 
   if (localStorage.getItem("cartProducts") !== null) {
-    let productObj = JSON.parse(localStorage.getItem("cartProducts"));
+    const productObj = JSON.parse(localStorage.getItem("cartProducts"));
 
     productObj.forEach((p) => {
       products.push(p._id);
     });
   }
 
-  let contactProducts = JSON.stringify({
+  const contactProducts = JSON.stringify({
     contact,
     products,
   });
